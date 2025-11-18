@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Review Tool - Manager Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .header-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 12px 20px;
+            background: white;
+            border: 2px solid #e1e5eb;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-tab:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .nav-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e1e5eb;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e1e5eb;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .card-subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* Rating Slider */
+        .rating-section {
+            margin-bottom: 32px;
+        }
+
+        .rating-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .rating-label {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .rating-value {
+            font-size: 24px;
+            font-weight: 700;
+            width: 40px;
+            text-align: center;
+        }
+
+        .rating-value.score-4 { color: #10b981; }
+        .rating-value.score-3 { color: #f59e0b; }
+        .rating-value.score-2 { color: #f97316; }
+        .rating-value.score-1 { color: #ef4444; }
+
+        .slider-container {
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e1e5eb;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(102, 126, 234, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .slider-label {
+            text-align: center;
+            flex: 1;
+        }
+
+        /* Rating Description */
+        .rating-description {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #666;
+            border-left: 3px solid #667eea;
+        }
+
+        /* Feedback Sections */
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .feedback-box {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid #e1e5eb;
+        }
+
+        .feedback-box h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .feedback-box.manager-notes {
+            background: #fef3c7;
+            border-color: #fcd34d;
+        }
+
+        .feedback-box.manager-notes h4 {
+            color: #d97706;
+        }
+
+        .feedback-text {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 1px solid #e1e5eb;
+            border-radius: 6px;
+            font-size: 14px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .feedback-text:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .feedback-box.manager-notes .feedback-text {
+            background: white;
+        }
+
+        /* Competencies Drag & Drop */
+        .competencies-section {
+            margin-top: 24px;
+        }
+
+        .competency-pools {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .competency-pool {
+            min-height: 200px;
+            padding: 16px;
+            border-radius: 8px;
+            border: 2px dashed #e1e5eb;
+        }
+
+        .competency-pool.available {
+            background: #f8fafc;
+        }
+
+        .competency-pool.selected {
+            background: #f0fdf4;
+            border-color: #86efac;
+        }
+
+        .pool-header {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #666;
+        }
+
+        .competency-item {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: grab;
+            border: 1px solid #e1e5eb;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .competency-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .competency-item.dragging {
+            opacity: 0.5;
+            transform: rotate(2deg);
+        }
+
+        .competency-item .comp-name {
+            font-weight: 500;
+        }
+
+        .competency-item .comp-desc {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* Summary Section */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+        }
+
+        .summary-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .summary-item .label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-item .value {
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        .summary-item.eligible .value {
+            color: #10b981;
+        }
+
+        .summary-item.not-eligible .value {
+            color: #f97316;
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+        }
+
+        /* Progress Indicator */
+        .progress-bar {
+            height: 6px;
+            background: #e1e5eb;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+
+        /* Collapsible Sections */
+        .section-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-toggle .arrow {
+            transition: transform 0.2s;
+        }
+
+        .section-toggle.collapsed .arrow {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            overflow: hidden;
+            transition: max-height 0.3s;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .competency-pools {
+                grid-template-columns: 1fr;
+            }
+
+            .feedback-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-badge.draft {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .status-badge.submitted {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        /* Tooltip */
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            background: #e1e5eb;
+            border-radius: 50%;
+            font-size: 10px;
+            cursor: help;
+            margin-left: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+                <div>
+                    <h1>Performance Review</h1>
+                    <div class="header-meta">
+                        <span><strong>Employee:</strong> Sarah Chen</span>
+                        <span><strong>Role:</strong> Senior Software Engineer (IC3)</span>
+                        <span><strong>Period:</strong> H2 2024</span>
+                    </div>
+                </div>
+                <span class="status-badge draft">Draft</span>
+            </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="card" style="padding: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px;">
+                <span>Review Progress</span>
+                <span><strong>5 of 7</strong> sections complete</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 71%;"></div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <div class="nav-tab active">Universal Criteria</div>
+            <div class="nav-tab">Competencies</div>
+            <div class="nav-tab">Overall Summary</div>
+        </div>
+
+        <!-- Universal Criteria Section -->
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Universal Criteria</div>
+                    <div class="card-subtitle">These apply to all engineering roles</div>
+                </div>
+            </div>
+
+            <!-- Craft/Quality -->
+            <div class="rating-section">
+                <div class="rating-header">
+                    <div>
+                        <span class="rating-label">Craft / Quality</span>
+                        <span class="info-icon">?</span>
+                    </div>
+                    <div class="rating-value score-4" id="craft-value">4</div>
+                </div>
+                <div class="slider-container">
+                    <input type="range" min="1" max="4" value="4" class="slider" id="craft-slider"
+                           oninput="updateRating('craft', this.value)">
+                    <div class="slider-labels">
+                        <span class="slider-label">1<br>Unacceptable</span>
+                        <span class="slider-label">2<br>Below</span>
+                        <span class="slider-label">3<br>Needs Improvement</span>
+                        <span class="slider-label">4<br>Meets Expectations</span>
+                    </div>
+                </div>
+                <div class="rating-description" id="craft-description">
+                    <strong>Meets Expectations:</strong> Consistently delivers high-quality output, proactively considers edge cases, code is well-documented and maintainable.
+                </div>
+
+                <div class="feedback-grid">
+                    <div class="feedback-box">
+                        <h4>Self Review</h4>
+                        <textarea class="feedback-text" placeholder="Employee's self-assessment for this criterion...">I've consistently delivered high-quality code throughout H2. My PRs typically pass review with minimal changes. I identified and fixed 3 critical bugs before they reached production. I also established new testing patterns for our team.</textarea>
+                    </div>
+                    <div class="feedback-box">
+                        <h4>360 Feedback</h4>
+                        <textarea class="feedback-text" placeholder="Peer feedback for this criterion...">"Sarah's code is always well-structured and easy to review." - James K.
+
+"She catches edge cases I wouldn't have thought of." - Maria L.
+
+"Great attention to detail, her PRs are exemplary." - David R.</textarea>
+                    </div>
+                    <div class="feedback-box manager-notes">
+                        <h4>Manager Notes</h4>
+                        <textarea class="feedback-text" placeholder="Your observations and assessment...">Agree with the 4 rating. Sarah's code quality has been consistently excellent. The new testing patterns she introduced reduced our bug rate by 40%. Her PR on the payment refactor was particularly impressive - well-documented and handled all edge cases.</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Speed -->
+            <div class="rating-section">
+                <div class="rating-header">
+                    <div>
+                        <span class="rating-label">Speed</span>
+                        <span class="info-icon">?</span>
+                    </div>
+                    <div class="rating-value score-3" id="speed-value">3</div>
+                </div>
+                <div class="slider-container">
+                    <input type="range" min="1" max="4" value="3" class="slider" id="speed-slider"
+                           oninput="updateRating('speed', this.value)">
+                    <div class="slider-labels">
+                        <span class="slider-label">1<br>Unacceptable</span>
+                        <span class="slider-label">2<br>Below</span>
+                        <span class="slider-label">3<br>Needs Improvement</span>
+                        <span class="slider-label">4<br>Meets Expectations</span>
+                    </div>
+                </div>
+                <div class="rating-description" id="speed-description">
+                    <strong>Needs Improvement:</strong> Does good work but takes longer than necessary. Waits too long to ask for help when blocked.
+                </div>
+
+                <div class="feedback-grid">
+                    <div class="feedback-box">
+                        <h4>Self Review</h4>
+                        <textarea class="feedback-text" placeholder="Employee's self-assessment...">I delivered all my H2 projects, though the auth migration took longer than estimated. I sometimes spend too much time trying to solve problems independently before asking for help.</textarea>
+                    </div>
+                    <div class="feedback-box">
+                        <h4>360 Feedback</h4>
+                        <textarea class="feedback-text" placeholder="Peer feedback...">"Sarah does great work but sometimes I find out she was stuck on something for days." - James K.</textarea>
+                    </div>
+                    <div class="feedback-box manager-notes">
+                        <h4>Manager Notes</h4>
+                        <textarea class="feedback-text" placeholder="Your observations...">Rating 3 here. Sarah's work quality is excellent but she needs to improve on asking for help. The auth migration was delayed by a week because she didn't escalate a blocker early enough. We discussed this in our 1:1 - she's working on speaking up sooner. Development goal for next half.</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adaptiveness -->
+            <div class="rating-section">
+                <div class="rating-header">
+                    <div>
+                        <span class="rating-label">Adaptiveness</span>
+                        <span class="info-icon">?</span>
+                    </div>
+                    <div class="rating-value score-4" id="adapt-value">4</div>
+                </div>
+                <div class="slider-container">
+                    <input type="range" min="1" max="4" value="4" class="slider" id="adapt-slider"
+                           oninput="updateRating('adapt', this.value)">
+                    <div class="slider-labels">
+                        <span class="slider-label">1<br>Unacceptable</span>
+                        <span class="slider-label">2<br>Below</span>
+                        <span class="slider-label">3<br>Needs Improvement</span>
+                        <span class="slider-label">4<br>Meets Expectations</span>
+                    </div>
+                </div>
+                <div class="rating-description" id="adapt-description">
+                    <strong>Meets Expectations:</strong> Embraces feedback quickly, adjusts approach based on new information, flexible when priorities shift.
+                </div>
+
+                <div class="feedback-grid">
+                    <div class="feedback-box">
+                        <h4>Self Review</h4>
+                        <textarea class="feedback-text" placeholder="Employee's self-assessment...">I've been flexible with changing priorities this half. When we pivoted from the dashboard project to urgent security fixes, I quickly ramped up on the new requirements. I also incorporated all code review feedback promptly.</textarea>
+                    </div>
+                    <div class="feedback-box">
+                        <h4>360 Feedback</h4>
+                        <textarea class="feedback-text" placeholder="Peer feedback...">"Sarah is great at taking feedback. She never gets defensive." - Maria L.
+
+"When we had to pivot mid-sprint, she handled it really well." - David R.</textarea>
+                    </div>
+                    <div class="feedback-box manager-notes">
+                        <h4>Manager Notes</h4>
+                        <textarea class="feedback-text" placeholder="Your observations...">Strong 4 here. Sarah demonstrated excellent adaptiveness during the Q4 pivot. She picked up the security work quickly despite it not being her area. Always incorporates feedback constructively.</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Competencies Section -->
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Role-Specific Competencies</div>
+                    <div class="card-subtitle">Senior Software Engineer (IC3) - Select and rate applicable competencies</div>
+                </div>
+            </div>
+
+            <div class="competencies-section">
+                <div class="competency-pools">
+                    <div class="competency-pool available" id="available-pool">
+                        <div class="pool-header">Available Competencies</div>
+                        <div class="competency-item" draggable="true" ondragstart="drag(event)" id="comp-innovation">
+                            <div class="comp-name">Innovation</div>
+                            <div class="comp-desc">Drives adoption of new technologies</div>
+                        </div>
+                    </div>
+                    <div class="competency-pool selected" id="selected-pool"
+                         ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <div class="pool-header">Selected for Review (drag here)</div>
+                        <div class="competency-item" draggable="true" ondragstart="drag(event)" id="comp-quality">
+                            <div class="comp-name">Code Quality</div>
+                            <div class="comp-desc">Setting and exemplifying standards</div>
+                        </div>
+                        <div class="competency-item" draggable="true" ondragstart="drag(event)" id="comp-problem">
+                            <div class="comp-name">Technical Problem Solving</div>
+                            <div class="comp-desc">Solving complex problems</div>
+                        </div>
+                        <div class="competency-item" draggable="true" ondragstart="drag(event)" id="comp-design">
+                            <div class="comp-name">System Design</div>
+                            <div class="comp-desc">Designing complex features and systems</div>
+                        </div>
+                        <div class="competency-item" draggable="true" ondragstart="drag(event)" id="comp-mentor">
+                            <div class="comp-name">Mentoring</div>
+                            <div class="comp-desc">Developing junior team members</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Competency Ratings -->
+                <div style="margin-top: 32px;">
+                    <h3 style="font-size: 16px; margin-bottom: 16px;">Rate Selected Competencies</h3>
+
+                    <!-- Code Quality Competency -->
+                    <div class="rating-section" style="border: 1px solid #e1e5eb; border-radius: 8px; padding: 20px; margin-bottom: 16px;">
+                        <div class="rating-header">
+                            <div>
+                                <span class="rating-label">Code Quality</span>
+                            </div>
+                            <div class="rating-value score-4" id="comp1-value">4</div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="1" max="4" value="4" class="slider" id="comp1-slider"
+                                   oninput="updateRating('comp1', this.value)">
+                        </div>
+                        <div class="feedback-grid" style="margin-top: 16px;">
+                            <div class="feedback-box manager-notes" style="grid-column: 1 / -1;">
+                                <h4>Manager Notes</h4>
+                                <textarea class="feedback-text" placeholder="Your assessment of this competency...">Sarah's code consistently serves as an example for the team. She established our new testing patterns and actively works to pay down tech debt. Her code reviews are thorough and educational.</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mentoring Competency -->
+                    <div class="rating-section" style="border: 1px solid #e1e5eb; border-radius: 8px; padding: 20px; margin-bottom: 16px;">
+                        <div class="rating-header">
+                            <div>
+                                <span class="rating-label">Mentoring</span>
+                            </div>
+                            <div class="rating-value score-4" id="comp2-value">4</div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="1" max="4" value="4" class="slider" id="comp2-slider"
+                                   oninput="updateRating('comp2', this.value)">
+                        </div>
+                        <div class="feedback-grid" style="margin-top: 16px;">
+                            <div class="feedback-box manager-notes" style="grid-column: 1 / -1;">
+                                <h4>Manager Notes</h4>
+                                <textarea class="feedback-text" placeholder="Your assessment...">Sarah has been mentoring Alex and Jordan this half. Both have shown significant improvement. She holds regular pairing sessions and provides actionable feedback. Alex specifically credited Sarah with helping him level up his debugging skills.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Review Summary</div>
+                    <div class="card-subtitle">Overall assessment and compensation eligibility</div>
+                </div>
+            </div>
+
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="label">Craft/Quality</div>
+                    <div class="value" style="color: #10b981;">4</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Speed</div>
+                    <div class="value" style="color: #f59e0b;">3</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Adaptiveness</div>
+                    <div class="value" style="color: #10b981;">4</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Code Quality</div>
+                    <div class="value" style="color: #10b981;">4</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Mentoring</div>
+                    <div class="value" style="color: #10b981;">4</div>
+                </div>
+                <div class="summary-item not-eligible">
+                    <div class="label">Merit Eligible</div>
+                    <div class="value">No</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 24px; padding: 16px; background: #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                <strong style="color: #d97706;">Not eligible for merit increase</strong>
+                <p style="margin-top: 8px; font-size: 14px; color: #92400e;">
+                    Employee received a 3 in Speed. A development plan should be created to address this area.
+                </p>
+            </div>
+
+            <div class="feedback-grid" style="margin-top: 24px;">
+                <div class="feedback-box manager-notes" style="grid-column: 1 / -1;">
+                    <h4>Overall Manager Summary</h4>
+                    <textarea class="feedback-text" style="min-height: 150px;" placeholder="Your overall assessment...">Sarah had a strong H2 overall. Her technical work is excellent and she's become a valuable mentor on the team. The one area for development is speaking up when blocked - she tends to struggle alone rather than asking for help, which has impacted delivery timelines.
+
+Development goal for H1 2025: Practice proactive communication when blocked. We'll set up check-in points during projects and she'll practice the "I've tried X and Y, can you help?" format.
+
+With this improvement, Sarah would be on track for all 4s next cycle. She's a strong contributor and important to the team.</textarea>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-secondary">Save Draft</button>
+                <button class="btn btn-secondary">Preview</button>
+                <button class="btn btn-primary">Submit for Calibration</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Rating descriptions
+        const descriptions = {
+            craft: {
+                4: '<strong>Meets Expectations:</strong> Consistently delivers high-quality output, proactively considers edge cases, code is well-documented and maintainable.',
+                3: '<strong>Needs Improvement:</strong> Quality is acceptable but inconsistent. Sometimes misses edge cases or requires frequent review feedback.',
+                2: '<strong>Below Expectations:</strong> Frequent quality issues despite feedback. Code requires significant rework.',
+                1: '<strong>Unacceptable:</strong> Consistent quality failures. Unable to meet minimum standards.'
+            },
+            speed: {
+                4: '<strong>Meets Expectations:</strong> Completes work within reasonable timeframes. Asks for help when blocked and communicates progress proactively.',
+                3: '<strong>Needs Improvement:</strong> Does good work but takes longer than necessary. Waits too long to ask for help when blocked.',
+                2: '<strong>Below Expectations:</strong> Consistently slow execution. Doesn\'t communicate delays until after deadlines.',
+                1: '<strong>Unacceptable:</strong> Unable to complete work in any reasonable timeframe. Complete lack of communication.'
+            },
+            adapt: {
+                4: '<strong>Meets Expectations:</strong> Embraces feedback quickly, adjusts approach based on new information, flexible when priorities shift.',
+                3: '<strong>Needs Improvement:</strong> Slow to incorporate feedback. Struggles with changes to plans or priorities.',
+                2: '<strong>Below Expectations:</strong> Resistant to feedback. Refuses to change approach despite evidence.',
+                1: '<strong>Unacceptable:</strong> Actively resists necessary changes. Defensive and combative when given feedback.'
+            }
+        };
+
+        function updateRating(type, value) {
+            const valueEl = document.getElementById(type + '-value');
+            if (valueEl) {
+                valueEl.textContent = value;
+                valueEl.className = 'rating-value score-' + value;
+            }
+
+            const descEl = document.getElementById(type + '-description');
+            if (descEl && descriptions[type]) {
+                descEl.innerHTML = descriptions[type][value];
+            }
+        }
+
+        // Drag and drop for competencies
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+            ev.target.classList.add('dragging');
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            var element = document.getElementById(data);
+            element.classList.remove('dragging');
+
+            // Find the pool container
+            var pool = ev.target;
+            while (pool && !pool.classList.contains('competency-pool')) {
+                pool = pool.parentElement;
+            }
+
+            if (pool) {
+                pool.appendChild(element);
+            }
+        }
+
+        // Tab navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

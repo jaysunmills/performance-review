@@ -19,10 +19,12 @@ Thumbs.db
 # Generated files
 *.pdf
 *.docx
-*.html
 output/
 dist/
 build/
+
+# Allow mockups HTML files
+!mockups/*.html
 
 # Temporary files
 tmp/
