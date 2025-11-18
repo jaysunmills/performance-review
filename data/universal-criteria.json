@@ -1,0 +1,179 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-01-15",
+  "description": "Universal criteria that apply to all engineering roles",
+  "criteria": [
+    {
+      "id": "craft-quality",
+      "name": "Craft/Quality",
+      "description": "Excellence in core role responsibilities",
+      "weight": 1,
+      "levels": {
+        "4": {
+          "name": "Meets Expectations",
+          "description": "Consistently delivers high-quality output",
+          "behaviors": [
+            "Consistently delivers high-quality output without excessive rework",
+            "Proactively considers edge cases, error handling, and failure modes",
+            "Code/work is well-documented and maintainable by others",
+            "Follows and improves team standards and best practices",
+            "Catches own mistakes before review/handoff",
+            "Takes pride in craftsmanship beyond 'just making it work'"
+          ]
+        },
+        "3": {
+          "name": "Needs Improvement",
+          "description": "Quality is acceptable but inconsistent",
+          "behaviors": [
+            "Quality is acceptable but inconsistent",
+            "Sometimes misses edge cases or error handling",
+            "Requires frequent review feedback on the same issues",
+            "Documentation is incomplete or unclear",
+            "Meets minimum standards but doesn't exceed them"
+          ],
+          "coaching_focus": [
+            "Establish personal quality checklist",
+            "Pair with high-quality performers",
+            "Review own work before submission",
+            "Study team best practices"
+          ]
+        },
+        "2": {
+          "name": "Below Expectations",
+          "description": "Frequent quality issues despite feedback",
+          "behaviors": [
+            "Frequent quality issues despite feedback",
+            "Code/work requires significant rework",
+            "Doesn't learn from past mistakes",
+            "Impacts team velocity due to quality issues"
+          ]
+        },
+        "1": {
+          "name": "Unacceptable",
+          "description": "Consistent quality failures",
+          "behaviors": [
+            "Consistent quality failures",
+            "Unable or unwilling to meet minimum standards",
+            "Work cannot be shipped/used without major intervention"
+          ]
+        }
+      }
+    },
+    {
+      "id": "speed",
+      "name": "Speed",
+      "description": "Reasonable execution pace combined with proactive self-unblocking",
+      "weight": 1,
+      "key_insight": "The difference between a 4 and a 3 is often about asking for help",
+      "levels": {
+        "4": {
+          "name": "Meets Expectations",
+          "description": "Completes work in reasonable time and proactively unblocks self",
+          "behaviors": [
+            "Completes work within reasonable timeframes for complexity",
+            "Asks for help when blocked (proactive, not reactive)",
+            "Communicates progress and obstacles early",
+            "Doesn't let blockers fester—escalates appropriately",
+            "Manages own time effectively",
+            "Provides realistic estimates and updates when at risk"
+          ]
+        },
+        "3": {
+          "name": "Needs Improvement",
+          "description": "Does good work but doesn't speak up when blocked",
+          "behaviors": [
+            "Does good work but takes longer than necessary",
+            "Waits too long to ask for help",
+            "'Didn't want to bother anyone' mentality",
+            "Gets stuck without speaking up",
+            "Misses deadlines due to unreported obstacles",
+            "Needs to be 'rescued' instead of asking for help"
+          ],
+          "coaching_focus": [
+            "Normalize asking for help",
+            "Set explicit check-in points",
+            "Practice 'help request' format",
+            "Build psychological safety"
+          ]
+        },
+        "2": {
+          "name": "Below Expectations",
+          "description": "Consistently slow execution without improvement",
+          "behaviors": [
+            "Consistently slow execution without improvement",
+            "Doesn't communicate delays until after deadlines",
+            "Resistant to time management suggestions",
+            "Impacts team commitments"
+          ]
+        },
+        "1": {
+          "name": "Unacceptable",
+          "description": "Unable to complete work in any reasonable timeframe",
+          "behaviors": [
+            "Unable to complete work in any reasonable timeframe",
+            "Complete lack of communication about status",
+            "Severe impact on team delivery"
+          ]
+        }
+      }
+    },
+    {
+      "id": "adaptiveness",
+      "name": "Adaptiveness",
+      "description": "Willingness to change and flexibility in approach",
+      "weight": 1,
+      "levels": {
+        "4": {
+          "name": "Meets Expectations",
+          "description": "Embraces feedback and adapts quickly",
+          "behaviors": [
+            "Embraces feedback and incorporates it quickly",
+            "Adjusts approach based on new information",
+            "Flexible when priorities shift",
+            "Open to different solutions and perspectives",
+            "Handles ambiguity constructively",
+            "Learns new technologies/tools as needed",
+            "Doesn't get defensive when plans change"
+          ]
+        },
+        "3": {
+          "name": "Needs Improvement",
+          "description": "Slow to incorporate feedback or adapt to change",
+          "behaviors": [
+            "Slow to incorporate feedback",
+            "Struggles with changes to plans or priorities",
+            "'That's not how we did it at my last company'",
+            "Attached to original solutions even when they're not working",
+            "Needs excessive convincing to try new approaches",
+            "Uncomfortable with ambiguity"
+          ],
+          "coaching_focus": [
+            "Practice 'yes, and' mindset",
+            "Explore reasons for resistance",
+            "Small experiments with new approaches",
+            "Build comfort with ambiguity"
+          ]
+        },
+        "2": {
+          "name": "Below Expectations",
+          "description": "Resistant to feedback and change",
+          "behaviors": [
+            "Resistant to feedback",
+            "Refuses to change approach despite evidence",
+            "Negatively impacts team flexibility",
+            "Creates friction when priorities shift"
+          ]
+        },
+        "1": {
+          "name": "Unacceptable",
+          "description": "Actively resists necessary changes",
+          "behaviors": [
+            "Actively resists necessary changes",
+            "Defensive and combative when given feedback",
+            "Unable to function in dynamic environment"
+          ]
+        }
+      }
+    }
+  ]
+}

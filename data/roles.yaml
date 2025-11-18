@@ -1,0 +1,747 @@
+# Engineering Role Definitions
+# Version: 1.0.0
+# Last Updated: 2025-01-15
+
+version: "1.0.0"
+last_updated: "2025-01-15"
+
+tracks:
+  # ============================================================================
+  # INDIVIDUAL CONTRIBUTOR TRACK
+  # ============================================================================
+  ic_track:
+    name: "Individual Contributor"
+    description: "Technical roles focused on hands-on engineering work"
+
+    roles:
+      # ------------------------------------------------------------------------
+      # Software Engineer
+      # ------------------------------------------------------------------------
+      software_engineer:
+        name: "Software Engineer"
+        description: "Designs, develops, and maintains software applications"
+        rubric_path: "rubrics/ic-track/software-engineer/"
+        levels:
+          ic1:
+            title: "Junior Software Engineer"
+            experience: "0-2 years"
+            scope: "Task execution within defined boundaries"
+            competencies:
+              - code_quality
+              - learning_agility
+            expectations:
+              - "Complete well-defined tasks with guidance"
+              - "Write clean, tested code for simple features"
+              - "Ask questions and seek help when stuck"
+              - "Learn team standards and practices"
+
+          ic2:
+            title: "Software Engineer"
+            experience: "2-4 years"
+            scope: "Feature ownership with some independence"
+            competencies:
+              - code_quality
+              - technical_problem_solving
+              - collaboration
+            expectations:
+              - "Own and deliver features end-to-end"
+              - "Debug and resolve issues independently"
+              - "Contribute to code reviews"
+              - "Understand system context for their work"
+
+          ic3:
+            title: "Senior Software Engineer"
+            experience: "4-7 years"
+            scope: "Technical leadership within team"
+            competencies:
+              - code_quality
+              - technical_problem_solving
+              - system_design
+              - mentoring
+            expectations:
+              - "Lead technical projects"
+              - "Design and implement complex features"
+              - "Mentor junior engineers"
+              - "Improve team practices and standards"
+
+          ic4:
+            title: "Staff Software Engineer"
+            experience: "7-12 years"
+            scope: "Cross-team technical impact"
+            competencies:
+              - technical_leadership
+              - architecture
+              - cross_team_collaboration
+              - strategic_thinking
+            expectations:
+              - "Drive architectural decisions"
+              - "Influence multiple teams"
+              - "Solve organization-level technical challenges"
+              - "Set technical direction"
+
+          ic5:
+            title: "Principal Software Engineer"
+            experience: "12+ years"
+            scope: "Organization-wide technical influence"
+            competencies:
+              - technical_vision
+              - innovation
+              - organizational_impact
+              - industry_expertise
+            expectations:
+              - "Define technical strategy"
+              - "Drive innovation and adoption of new technologies"
+              - "Represent company externally"
+              - "Solve the hardest technical problems"
+
+      # ------------------------------------------------------------------------
+      # Data Engineer
+      # ------------------------------------------------------------------------
+      data_engineer:
+        name: "Data Engineer"
+        description: "Builds and maintains data infrastructure and pipelines"
+        rubric_path: "rubrics/ic-track/data-engineer/"
+        levels:
+          ic1:
+            title: "Junior Data Engineer"
+            experience: "0-2 years"
+            scope: "Task execution within defined boundaries"
+            competencies:
+              - data_pipeline_quality
+              - learning_agility
+            expectations:
+              - "Build simple data pipelines with guidance"
+              - "Write clean, tested ETL code"
+              - "Learn data modeling fundamentals"
+              - "Document data sources and transformations"
+
+          ic2:
+            title: "Data Engineer"
+            experience: "2-4 years"
+            scope: "Pipeline ownership with some independence"
+            competencies:
+              - data_pipeline_quality
+              - data_modeling
+              - collaboration
+            expectations:
+              - "Own and maintain data pipelines end-to-end"
+              - "Design data models for specific use cases"
+              - "Optimize query performance"
+              - "Collaborate with data consumers"
+
+          ic3:
+            title: "Senior Data Engineer"
+            experience: "4-7 years"
+            scope: "Technical leadership within data team"
+            competencies:
+              - data_pipeline_quality
+              - data_architecture
+              - system_design
+              - mentoring
+            expectations:
+              - "Design complex data systems"
+              - "Lead data platform improvements"
+              - "Mentor junior data engineers"
+              - "Define data quality standards"
+
+          ic4:
+            title: "Staff Data Engineer"
+            experience: "7-12 years"
+            scope: "Cross-team data infrastructure impact"
+            competencies:
+              - technical_leadership
+              - data_platform_architecture
+              - cross_team_collaboration
+              - strategic_thinking
+            expectations:
+              - "Drive data platform strategy"
+              - "Design organization-wide data infrastructure"
+              - "Influence data practices across teams"
+              - "Evaluate and adopt new data technologies"
+
+          ic5:
+            title: "Principal Data Engineer"
+            experience: "12+ years"
+            scope: "Organization-wide data strategy"
+            competencies:
+              - technical_vision
+              - innovation
+              - organizational_impact
+              - industry_expertise
+            expectations:
+              - "Define data engineering strategy"
+              - "Drive innovation in data infrastructure"
+              - "Represent company in data engineering community"
+              - "Solve the hardest data engineering challenges"
+
+      # ------------------------------------------------------------------------
+      # ML/AI Engineer
+      # ------------------------------------------------------------------------
+      ml_ai_engineer:
+        name: "ML/AI Engineer"
+        description: "Develops and deploys machine learning models and AI systems"
+        rubric_path: "rubrics/ic-track/ml-ai-engineer/"
+        levels:
+          ic1:
+            title: "Junior ML Engineer"
+            experience: "0-2 years"
+            scope: "Task execution within defined boundaries"
+            competencies:
+              - model_development_quality
+              - learning_agility
+            expectations:
+              - "Implement ML models with guidance"
+              - "Run experiments and document results"
+              - "Write clean, reproducible code"
+              - "Learn ML fundamentals and team practices"
+
+          ic2:
+            title: "ML Engineer"
+            experience: "2-4 years"
+            scope: "Model ownership with some independence"
+            competencies:
+              - model_development_quality
+              - experimentation
+              - collaboration
+            expectations:
+              - "Own model development end-to-end"
+              - "Design and run experiments"
+              - "Deploy models to production"
+              - "Collaborate with stakeholders on requirements"
+
+          ic3:
+            title: "Senior ML Engineer"
+            experience: "4-7 years"
+            scope: "Technical leadership within ML team"
+            competencies:
+              - model_development_quality
+              - ml_system_design
+              - research_application
+              - mentoring
+            expectations:
+              - "Lead complex ML projects"
+              - "Design ML systems for production"
+              - "Translate research into practical applications"
+              - "Mentor junior ML engineers"
+
+          ic4:
+            title: "Staff ML Engineer"
+            experience: "7-12 years"
+            scope: "Cross-team ML/AI impact"
+            competencies:
+              - technical_leadership
+              - ml_platform_architecture
+              - cross_team_collaboration
+              - strategic_thinking
+            expectations:
+              - "Drive ML platform strategy"
+              - "Influence ML practices across organization"
+              - "Lead adoption of new ML technologies"
+              - "Solve organization-level ML challenges"
+
+          ic5:
+            title: "Principal ML Engineer"
+            experience: "12+ years"
+            scope: "Organization-wide ML/AI strategy"
+            competencies:
+              - technical_vision
+              - innovation
+              - organizational_impact
+              - industry_expertise
+            expectations:
+              - "Define ML/AI strategy"
+              - "Drive innovation in ML/AI"
+              - "Represent company in ML/AI community"
+              - "Solve the hardest ML/AI problems"
+
+      # ------------------------------------------------------------------------
+      # DevOps/Platform Engineer
+      # ------------------------------------------------------------------------
+      devops_platform_engineer:
+        name: "DevOps/Platform Engineer"
+        description: "Builds and maintains infrastructure, CI/CD, and developer platforms"
+        rubric_path: "rubrics/ic-track/devops-platform-engineer/"
+        levels:
+          ic1:
+            title: "Junior DevOps Engineer"
+            experience: "0-2 years"
+            scope: "Task execution within defined boundaries"
+            competencies:
+              - infrastructure_quality
+              - learning_agility
+            expectations:
+              - "Complete infrastructure tasks with guidance"
+              - "Write clean infrastructure-as-code"
+              - "Learn CI/CD and cloud fundamentals"
+              - "Document procedures and runbooks"
+
+          ic2:
+            title: "DevOps Engineer"
+            experience: "2-4 years"
+            scope: "System ownership with some independence"
+            competencies:
+              - infrastructure_quality
+              - reliability_engineering
+              - collaboration
+            expectations:
+              - "Own and maintain infrastructure systems"
+              - "Build and improve CI/CD pipelines"
+              - "Respond to and resolve incidents"
+              - "Support development teams"
+
+          ic3:
+            title: "Senior DevOps Engineer"
+            experience: "4-7 years"
+            scope: "Technical leadership within platform team"
+            competencies:
+              - infrastructure_quality
+              - platform_design
+              - reliability_engineering
+              - mentoring
+            expectations:
+              - "Design platform solutions"
+              - "Lead reliability improvements"
+              - "Mentor junior DevOps engineers"
+              - "Define infrastructure standards"
+
+          ic4:
+            title: "Staff Platform Engineer"
+            experience: "7-12 years"
+            scope: "Cross-team platform impact"
+            competencies:
+              - technical_leadership
+              - platform_architecture
+              - cross_team_collaboration
+              - strategic_thinking
+            expectations:
+              - "Drive platform strategy"
+              - "Design organization-wide infrastructure"
+              - "Influence DevOps practices across teams"
+              - "Evaluate and adopt new technologies"
+
+          ic5:
+            title: "Principal Platform Engineer"
+            experience: "12+ years"
+            scope: "Organization-wide platform strategy"
+            competencies:
+              - technical_vision
+              - innovation
+              - organizational_impact
+              - industry_expertise
+            expectations:
+              - "Define platform engineering strategy"
+              - "Drive innovation in infrastructure"
+              - "Represent company in DevOps community"
+              - "Solve the hardest infrastructure challenges"
+
+      # ------------------------------------------------------------------------
+      # Security Engineer
+      # ------------------------------------------------------------------------
+      security_engineer:
+        name: "Security Engineer"
+        description: "Protects systems and data through security engineering"
+        rubric_path: "rubrics/ic-track/security-engineer/"
+        levels:
+          ic2:
+            title: "Security Engineer"
+            experience: "2-4 years"
+            scope: "Security implementation with guidance"
+            competencies:
+              - security_implementation
+              - threat_awareness
+              - collaboration
+            expectations:
+              - "Implement security controls"
+              - "Conduct security reviews"
+              - "Respond to security incidents"
+              - "Collaborate with development teams"
+
+          ic3:
+            title: "Senior Security Engineer"
+            experience: "4-7 years"
+            scope: "Technical leadership within security team"
+            competencies:
+              - security_implementation
+              - security_architecture
+              - threat_modeling
+              - mentoring
+            expectations:
+              - "Design security solutions"
+              - "Lead security assessments"
+              - "Mentor security engineers"
+              - "Define security standards"
+
+          ic4:
+            title: "Staff Security Engineer"
+            experience: "7-12 years"
+            scope: "Cross-team security impact"
+            competencies:
+              - technical_leadership
+              - security_architecture
+              - cross_team_collaboration
+              - strategic_thinking
+            expectations:
+              - "Drive security strategy"
+              - "Design organization-wide security architecture"
+              - "Influence security practices across teams"
+              - "Lead incident response for major events"
+
+          ic5:
+            title: "Principal Security Engineer"
+            experience: "12+ years"
+            scope: "Organization-wide security strategy"
+            competencies:
+              - technical_vision
+              - innovation
+              - organizational_impact
+              - industry_expertise
+            expectations:
+              - "Define security engineering strategy"
+              - "Drive innovation in security"
+              - "Represent company in security community"
+              - "Solve the hardest security challenges"
+
+      # ------------------------------------------------------------------------
+      # QA/Test Engineer
+      # ------------------------------------------------------------------------
+      qa_test_engineer:
+        name: "QA/Test Engineer"
+        description: "Ensures software quality through testing and automation"
+        rubric_path: "rubrics/ic-track/qa-test-engineer/"
+        levels:
+          ic1:
+            title: "Junior QA Engineer"
+            experience: "0-2 years"
+            scope: "Task execution within defined boundaries"
+            competencies:
+              - testing_quality
+              - learning_agility
+            expectations:
+              - "Execute test cases with guidance"
+              - "Write simple automated tests"
+              - "Document bugs clearly"
+              - "Learn testing fundamentals"
+
+          ic2:
+            title: "QA Engineer"
+            experience: "2-4 years"
+            scope: "Test ownership with some independence"
+            competencies:
+              - testing_quality
+              - test_automation
+              - collaboration
+            expectations:
+              - "Own test suites for features"
+              - "Build automated test frameworks"
+              - "Design test strategies"
+              - "Collaborate with developers on quality"
+
+          ic3:
+            title: "Senior QA Engineer"
+            experience: "4-7 years"
+            scope: "Technical leadership within QA team"
+            competencies:
+              - testing_quality
+              - test_architecture
+              - quality_strategy
+              - mentoring
+            expectations:
+              - "Design test architectures"
+              - "Lead quality initiatives"
+              - "Mentor junior QA engineers"
+              - "Define quality standards"
+
+          ic4:
+            title: "Staff QA Engineer"
+            experience: "7-12 years"
+            scope: "Cross-team quality impact"
+            competencies:
+              - technical_leadership
+              - quality_architecture
+              - cross_team_collaboration
+              - strategic_thinking
+            expectations:
+              - "Drive quality strategy"
+              - "Design organization-wide test infrastructure"
+              - "Influence quality practices across teams"
+              - "Evaluate and adopt new testing technologies"
+
+  # ============================================================================
+  # MANAGEMENT TRACK
+  # ============================================================================
+  management_track:
+    name: "Engineering Management"
+    description: "Leadership roles focused on people management and team delivery"
+
+    roles:
+      engineering_manager:
+        name: "Engineering Manager"
+        description: "Manages engineering teams and delivers through others"
+        rubric_path: "rubrics/management-track/"
+        levels:
+          m1:
+            title: "Engineering Manager"
+            team_size: "4-8 engineers"
+            scope: "Single team management"
+            competencies:
+              - people_management
+              - delivery_management
+              - technical_credibility
+              - team_development
+            expectations:
+              - "Manage and develop 4-8 engineers"
+              - "Deliver team commitments"
+              - "Conduct effective 1:1s and reviews"
+              - "Maintain technical context"
+
+          m2:
+            title: "Senior Engineering Manager"
+            team_size: "8-12 engineers or multiple teams"
+            scope: "Multiple team management"
+            competencies:
+              - people_management
+              - delivery_management
+              - technical_strategy
+              - organizational_development
+            expectations:
+              - "Manage larger team or multiple teams"
+              - "Drive cross-team coordination"
+              - "Develop team leads"
+              - "Influence technical direction"
+
+          m3:
+            title: "Director of Engineering"
+            team_size: "20-40 engineers (managing managers)"
+            scope: "Department management"
+            competencies:
+              - organizational_leadership
+              - strategic_planning
+              - executive_communication
+              - talent_strategy
+            expectations:
+              - "Manage engineering managers"
+              - "Drive department strategy"
+              - "Partner with product and business"
+              - "Build organizational capability"
+
+          m4:
+            title: "VP of Engineering"
+            team_size: "40+ engineers (managing directors)"
+            scope: "Organization-wide engineering leadership"
+            competencies:
+              - executive_leadership
+              - business_strategy
+              - organizational_design
+              - industry_presence
+            expectations:
+              - "Define engineering vision and strategy"
+              - "Partner with C-level executives"
+              - "Drive organizational transformation"
+              - "Represent engineering externally"
+
+  # ============================================================================
+  # TPM/PM TRACK
+  # ============================================================================
+  tpm_pm_track:
+    name: "Technical Program/Product Management"
+    description: "Roles focused on program/project/product management in technical contexts"
+
+    roles:
+      # ------------------------------------------------------------------------
+      # Technical Project Manager
+      # ------------------------------------------------------------------------
+      technical_project_manager:
+        name: "Technical Project Manager"
+        description: "Manages technical projects from initiation to delivery"
+        rubric_path: "rubrics/tpm-pm-track/technical-project-manager/"
+        levels:
+          tpm1:
+            title: "Junior Technical Project Manager"
+            experience: "0-2 years"
+            scope: "Small project management"
+            competencies:
+              - project_execution
+              - communication
+              - learning_agility
+            expectations:
+              - "Manage small technical projects"
+              - "Track progress and report status"
+              - "Coordinate team activities"
+              - "Learn project management fundamentals"
+
+          tpm2:
+            title: "Technical Project Manager"
+            experience: "2-5 years"
+            scope: "Medium project management"
+            competencies:
+              - project_execution
+              - risk_management
+              - stakeholder_management
+              - technical_understanding
+            expectations:
+              - "Manage medium-complexity projects"
+              - "Identify and mitigate risks"
+              - "Manage stakeholder expectations"
+              - "Drive project decisions"
+
+          tpm3:
+            title: "Senior Technical Project Manager"
+            experience: "5-10 years"
+            scope: "Complex project management"
+            competencies:
+              - project_leadership
+              - strategic_planning
+              - cross_functional_leadership
+              - mentoring
+            expectations:
+              - "Lead complex, high-impact projects"
+              - "Drive strategic project initiatives"
+              - "Mentor junior TPMs"
+              - "Influence project management practices"
+
+          tpm4:
+            title: "Staff Technical Project Manager"
+            experience: "10+ years"
+            scope: "Portfolio-level project leadership"
+            competencies:
+              - portfolio_management
+              - organizational_influence
+              - strategic_thinking
+              - executive_communication
+            expectations:
+              - "Manage project portfolios"
+              - "Drive organizational project practices"
+              - "Partner with executives"
+              - "Lead most critical initiatives"
+
+      # ------------------------------------------------------------------------
+      # Technical Program Manager
+      # ------------------------------------------------------------------------
+      technical_program_manager:
+        name: "Technical Program Manager"
+        description: "Manages programs of related technical projects"
+        rubric_path: "rubrics/tpm-pm-track/technical-program-manager/"
+        levels:
+          tpgm1:
+            title: "Program Manager"
+            scope: "Multiple related projects"
+            competencies:
+              - program_execution
+              - cross_project_coordination
+              - stakeholder_management
+              - technical_understanding
+            expectations:
+              - "Coordinate multiple related projects"
+              - "Manage program dependencies"
+              - "Report program status to leadership"
+              - "Drive cross-team alignment"
+
+          tpgm2:
+            title: "Senior Program Manager"
+            scope: "Strategic program management"
+            competencies:
+              - program_leadership
+              - strategic_planning
+              - executive_communication
+              - organizational_influence
+            expectations:
+              - "Lead strategic programs"
+              - "Drive program strategy"
+              - "Partner with executives"
+              - "Influence organizational priorities"
+
+          tpgm3:
+            title: "Principal Program Manager"
+            scope: "Organization-level programs"
+            competencies:
+              - portfolio_strategy
+              - organizational_transformation
+              - executive_partnership
+              - industry_expertise
+            expectations:
+              - "Lead organization-level programs"
+              - "Drive organizational transformation"
+              - "Partner with C-level executives"
+              - "Define program management standards"
+
+      # ------------------------------------------------------------------------
+      # Technical Product Manager
+      # ------------------------------------------------------------------------
+      technical_product_manager:
+        name: "Technical Product Manager"
+        description: "Defines and delivers technical products"
+        rubric_path: "rubrics/tpm-pm-track/technical-product-manager/"
+        levels:
+          pm1:
+            title: "Associate Product Manager"
+            experience: "0-2 years"
+            scope: "Feature-level product work"
+            competencies:
+              - product_execution
+              - user_understanding
+              - learning_agility
+            expectations:
+              - "Define and deliver features"
+              - "Gather user requirements"
+              - "Write clear product specs"
+              - "Learn product management fundamentals"
+
+          pm2:
+            title: "Product Manager"
+            experience: "2-5 years"
+            scope: "Product area ownership"
+            competencies:
+              - product_strategy
+              - user_research
+              - stakeholder_management
+              - technical_understanding
+            expectations:
+              - "Own product area roadmap"
+              - "Drive product decisions"
+              - "Collaborate with engineering"
+              - "Measure product success"
+
+          pm3:
+            title: "Senior Product Manager"
+            experience: "5-8 years"
+            scope: "Product line leadership"
+            competencies:
+              - product_leadership
+              - market_strategy
+              - cross_functional_leadership
+              - mentoring
+            expectations:
+              - "Lead product line strategy"
+              - "Drive product vision"
+              - "Mentor junior PMs"
+              - "Influence company strategy"
+
+          pm4:
+            title: "Staff Product Manager"
+            experience: "8-12 years"
+            scope: "Product portfolio leadership"
+            competencies:
+              - portfolio_strategy
+              - business_strategy
+              - organizational_influence
+              - executive_communication
+            expectations:
+              - "Drive product portfolio strategy"
+              - "Partner with executives"
+              - "Lead most critical products"
+              - "Define product practices"
+
+          pm5:
+            title: "Principal Product Manager"
+            experience: "12+ years"
+            scope: "Organization-wide product strategy"
+            competencies:
+              - product_vision
+              - innovation
+              - organizational_impact
+              - industry_expertise
+            expectations:
+              - "Define organization product strategy"
+              - "Drive product innovation"
+              - "Represent company externally"
+              - "Solve hardest product challenges"

@@ -1,0 +1,110 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "criteria-schema.json",
+  "title": "Universal Criteria Schema",
+  "description": "Schema for validating universal criteria JSON files",
+  "type": "object",
+  "required": ["version", "last_updated", "description", "criteria"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Semantic version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "Date last updated in YYYY-MM-DD format",
+      "format": "date"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the criteria set"
+    },
+    "criteria": {
+      "type": "array",
+      "description": "List of universal criteria",
+      "items": {
+        "$ref": "#/definitions/criterion"
+      },
+      "minItems": 1
+    }
+  },
+  "definitions": {
+    "criterion": {
+      "type": "object",
+      "required": ["id", "name", "description", "weight", "levels"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the criterion",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name for the criterion"
+        },
+        "description": {
+          "type": "string",
+          "description": "Definition of the criterion"
+        },
+        "weight": {
+          "type": "number",
+          "description": "Weight for scoring calculations",
+          "minimum": 0
+        },
+        "key_insight": {
+          "type": "string",
+          "description": "Key insight about this criterion"
+        },
+        "levels": {
+          "type": "object",
+          "description": "Scoring levels",
+          "properties": {
+            "4": {
+              "$ref": "#/definitions/scoringLevel"
+            },
+            "3": {
+              "$ref": "#/definitions/scoringLevel"
+            },
+            "2": {
+              "$ref": "#/definitions/scoringLevel"
+            },
+            "1": {
+              "$ref": "#/definitions/scoringLevel"
+            }
+          },
+          "required": ["4", "3", "2", "1"]
+        }
+      }
+    },
+    "scoringLevel": {
+      "type": "object",
+      "required": ["name", "description", "behaviors"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for this scoring level"
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description"
+        },
+        "behaviors": {
+          "type": "array",
+          "description": "Observable behaviors",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "coaching_focus": {
+          "type": "array",
+          "description": "Coaching suggestions",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

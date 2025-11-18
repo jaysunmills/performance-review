@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "rubric-schema.json",
+  "title": "Performance Rubric Schema",
+  "description": "Schema for validating performance rubric JSON files",
+  "type": "object",
+  "required": ["version", "last_updated", "role", "track", "levels"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the rubric",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "Date last updated in YYYY-MM-DD format",
+      "format": "date"
+    },
+    "role": {
+      "type": "string",
+      "description": "Role identifier (e.g., software-engineer, data-engineer)"
+    },
+    "track": {
+      "type": "string",
+      "description": "Track identifier (e.g., ic, management, tpm-pm)",
+      "enum": ["ic", "management", "tpm-pm"]
+    },
+    "levels": {
+      "type": "object",
+      "description": "Levels for this role (e.g., ic1, ic2, m1, etc.)",
+      "additionalProperties": {
+        "$ref": "#/definitions/level"
+      }
+    }
+  },
+  "definitions": {
+    "level": {
+      "type": "object",
+      "required": ["title", "scope", "competencies"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Full title for this level (e.g., Junior Software Engineer)"
+        },
+        "experience": {
+          "type": "string",
+          "description": "Expected experience range (e.g., 0-2 years)"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of responsibility at this level"
+        },
+        "team_size": {
+          "type": "string",
+          "description": "Team size for management roles"
+        },
+        "competencies": {
+          "type": "array",
+          "description": "List of competencies for this level",
+          "items": {
+            "$ref": "#/definitions/competency"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "competency": {
+      "type": "object",
+      "required": ["id", "name", "definition", "levels"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the competency (e.g., code-quality)",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name for the competency"
+        },
+        "definition": {
+          "type": "string",
+          "description": "Definition of what this competency means"
+        },
+        "levels": {
+          "type": "object",
+          "description": "Scoring levels (4, 3, 2, 1)",
+          "properties": {
+            "4": {
+              "$ref": "#/definitions/scoringLevel"
+            },
+            "3": {
+              "$ref": "#/definitions/scoringLevel"
+            },
+            "2": {
+              "$ref": "#/definitions/scoringLevel"
+            },
+            "1": {
+              "$ref": "#/definitions/scoringLevel"
+            }
+          },
+          "required": ["4", "3", "2"]
+        }
+      }
+    },
+    "scoringLevel": {
+      "type": "object",
+      "required": ["behaviors"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for this scoring level (e.g., Meets Expectations)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of this scoring level"
+        },
+        "behaviors": {
+          "type": "array",
+          "description": "Observable behaviors that demonstrate this scoring level",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "coaching_focus": {
+          "type": "array",
+          "description": "Coaching suggestions for improvement (typically for level 3)",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
