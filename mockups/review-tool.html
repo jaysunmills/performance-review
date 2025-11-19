@@ -481,6 +481,285 @@
             cursor: help;
             margin-left: 6px;
         }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        .modal {
+            background: white;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid #e1e5eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .modal-close:hover {
+            background: #f1f5f9;
+        }
+
+        .modal-body {
+            padding: 32px;
+        }
+
+        .modal-footer {
+            padding: 20px 32px;
+            border-top: 1px solid #e1e5eb;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        /* Preview Document Styles */
+        .preview-doc {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+        }
+
+        .preview-doc .doc-header {
+            text-align: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .preview-doc .doc-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .preview-doc .doc-subtitle {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .preview-doc .doc-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 24px 0;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 14px;
+        }
+
+        .preview-doc .doc-meta-item {
+            display: flex;
+            gap: 8px;
+        }
+
+        .preview-doc .doc-meta-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .preview-doc .section {
+            margin-bottom: 32px;
+        }
+
+        .preview-doc .section-title {
+            font-size: 18px;
+            color: #667eea;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e1e5eb;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .preview-doc .rating-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .preview-doc .rating-row .name {
+            font-weight: 500;
+        }
+
+        .preview-doc .rating-row .score {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .preview-doc .rating-row .score.s4 { color: #10b981; }
+        .preview-doc .rating-row .score.s3 { color: #f59e0b; }
+        .preview-doc .rating-row .score.s2 { color: #f97316; }
+        .preview-doc .rating-row .score.s1 { color: #ef4444; }
+
+        .preview-doc .narrative {
+            margin-bottom: 20px;
+        }
+
+        .preview-doc .narrative p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        .preview-doc .competency-detail {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 3px solid #667eea;
+        }
+
+        .preview-doc .competency-detail h4 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-doc .competency-detail p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .preview-doc .development-plan {
+            background: #fef3c7;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .preview-doc .development-plan h4 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #d97706;
+            margin-bottom: 12px;
+        }
+
+        .preview-doc .ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .preview-doc .eligibility-box {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 24px;
+        }
+
+        .preview-doc .eligibility-box.not-eligible {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .preview-doc .eligibility-box.eligible {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+
+        .preview-doc .eligibility-box .status {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .preview-doc .eligibility-box.not-eligible .status {
+            color: #dc2626;
+        }
+
+        .preview-doc .eligibility-box.eligible .status {
+            color: #16a34a;
+        }
+
+        .preview-doc .signature-area {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #e1e5eb;
+        }
+
+        .preview-doc .signature-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .preview-doc .signature-block {
+            width: 45%;
+        }
+
+        .preview-doc .signature-block .line {
+            border-bottom: 1px solid #333;
+            height: 40px;
+        }
+
+        .preview-doc .signature-block .label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -794,8 +1073,158 @@ With this improvement, Sarah would be on track for all 4s next cycle. She's a st
 
             <div class="actions">
                 <button class="btn btn-secondary">Save Draft</button>
-                <button class="btn btn-secondary">Preview</button>
+                <button class="btn btn-secondary" onclick="showPreview()">Preview</button>
                 <button class="btn btn-primary">Submit for Calibration</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div class="modal-overlay" id="preview-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Review Preview</h2>
+                <button class="modal-close" onclick="closePreview()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="preview-doc">
+                    <div class="ai-badge">
+                        <span>✨</span> AI-Generated Summary
+                    </div>
+
+                    <div class="doc-header">
+                        <div class="doc-title">Performance Review</div>
+                        <div class="doc-subtitle">H2 2024 Evaluation Period</div>
+                    </div>
+
+                    <div class="doc-meta">
+                        <div class="doc-meta-item">
+                            <span class="doc-meta-label">Employee:</span>
+                            <span>Sarah Chen</span>
+                        </div>
+                        <div class="doc-meta-item">
+                            <span class="doc-meta-label">Role:</span>
+                            <span>Senior Software Engineer (IC3)</span>
+                        </div>
+                        <div class="doc-meta-item">
+                            <span class="doc-meta-label">Manager:</span>
+                            <span>Michael Torres</span>
+                        </div>
+                        <div class="doc-meta-item">
+                            <span class="doc-meta-label">Review Date:</span>
+                            <span>January 15, 2025</span>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Rating Summary</div>
+                        <div class="rating-row">
+                            <span class="name">Craft / Quality</span>
+                            <span class="score s4">4 - Meets Expectations</span>
+                        </div>
+                        <div class="rating-row">
+                            <span class="name">Speed</span>
+                            <span class="score s3">3 - Needs Improvement</span>
+                        </div>
+                        <div class="rating-row">
+                            <span class="name">Adaptiveness</span>
+                            <span class="score s4">4 - Meets Expectations</span>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Executive Summary</div>
+                        <div class="narrative">
+                            <p>Sarah Chen has demonstrated exceptional technical capabilities during H2 2024, consistently delivering high-quality code that serves as a benchmark for the team. Her introduction of new testing patterns resulted in a 40% reduction in production bugs, showcasing her commitment to engineering excellence and proactive approach to quality improvement.</p>
+                            <p>Sarah has also made significant contributions as a mentor, successfully guiding two junior engineers (Alex and Jordan) who have shown marked improvement under her guidance. Her code reviews are thorough and educational, contributing to overall team growth.</p>
+                            <p>The primary area for development is proactive communication when blocked. Sarah has a tendency to work independently on problems for extended periods rather than escalating blockers early, which has impacted delivery timelines on occasion. This represents the key focus area for the coming review period.</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Role-Specific Competencies</div>
+
+                        <div class="competency-detail">
+                            <h4>
+                                <span>Code Quality</span>
+                                <span class="score s4">4</span>
+                            </h4>
+                            <p>Sarah's code consistently serves as an example for the team. She established new testing patterns that have become team standards and actively works to identify and pay down technical debt. Her code reviews are thorough, catching subtle issues and providing educational feedback that helps other engineers improve. The payment refactor PR was particularly exemplary—well-documented with comprehensive edge case handling.</p>
+                        </div>
+
+                        <div class="competency-detail">
+                            <h4>
+                                <span>Technical Problem Solving</span>
+                                <span class="score s4">4</span>
+                            </h4>
+                            <p>Demonstrates strong ability to solve complex, ambiguous technical problems. Successfully debugged and resolved three critical production issues before they impacted users. Creates documentation and tools that help the broader team solve problems more effectively. Teaches problem-solving approaches to junior engineers through pairing sessions.</p>
+                        </div>
+
+                        <div class="competency-detail">
+                            <h4>
+                                <span>System Design</span>
+                                <span class="score s4">4</span>
+                            </h4>
+                            <p>Designs features that are scalable, reliable, and maintainable. Consistently considers operational concerns including monitoring, debugging, and deployment. The authentication migration design, despite delivery delays, was architecturally sound and well-documented. Makes appropriate trade-offs and clearly documents design decisions for team reference.</p>
+                        </div>
+
+                        <div class="competency-detail">
+                            <h4>
+                                <span>Mentoring</span>
+                                <span class="score s4">4</span>
+                            </h4>
+                            <p>Actively mentors two junior engineers (Alex and Jordan), holding regular pairing sessions and providing actionable feedback. Both mentees have shown significant improvement—Alex specifically credited Sarah with helping him level up his debugging skills. Adjusts mentoring approach based on individual needs and creates learning opportunities through appropriate task delegation.</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Development Plan</div>
+                        <div class="development-plan">
+                            <h4>Focus Area: Proactive Communication When Blocked</h4>
+                            <p><strong>Goal:</strong> Improve timeliness of escalation when encountering blockers to prevent delivery delays.</p>
+                            <p><strong>Actions:</strong></p>
+                            <ul style="margin: 8px 0 8px 20px; font-size: 14px;">
+                                <li>Establish check-in points during projects (daily standup + mid-day if blocked)</li>
+                                <li>Practice the structured help request format: "I've tried X and Y, can you help me think through other options?"</li>
+                                <li>Set personal time-box (2 hours) before escalating blockers</li>
+                                <li>Monthly 1:1 check-ins to review communication patterns</li>
+                            </ul>
+                            <p><strong>Success Criteria:</strong> No project delays due to unreported blockers in H1 2025. Consistent early escalation of issues before they impact timelines.</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Overall Assessment</div>
+                        <div class="narrative">
+                            <p>Sarah had a strong H2 overall and is a valuable contributor to the team. Her technical excellence and mentoring contributions are significant assets. With improvement in proactive communication when blocked, Sarah would be well-positioned for all 4s in the next review cycle and continued growth in her senior engineer role.</p>
+                        </div>
+
+                        <div class="eligibility-box not-eligible">
+                            <div class="status">Not Eligible for Merit Increase</div>
+                            <p style="margin-top: 8px; font-size: 14px; color: #666;">
+                                Rating of 3 in Speed requires development plan completion before eligibility.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="signature-area">
+                        <div class="signature-line">
+                            <div class="signature-block">
+                                <div class="line"></div>
+                                <div class="label">Manager Signature / Date</div>
+                            </div>
+                            <div class="signature-block">
+                                <div class="line"></div>
+                                <div class="label">Employee Signature / Date</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closePreview()">Close</button>
+                <button class="btn btn-secondary">Export PDF</button>
+                <button class="btn btn-primary">Send to Employee</button>
             </div>
         </div>
     </div>
@@ -869,6 +1298,31 @@ With this improvement, Sarah would be on track for all 4s next cycle. She's a st
                 document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
             });
+        });
+
+        // Modal functions
+        function showPreview() {
+            document.getElementById('preview-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePreview() {
+            document.getElementById('preview-modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('preview-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePreview();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePreview();
+            }
         });
     </script>
 </body>
