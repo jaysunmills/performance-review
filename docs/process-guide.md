@@ -30,6 +30,51 @@ Reviews should help people grow, not just document the past. Our AI-assisted app
 
 ---
 
+## Process Flow Diagram
+
+Here's how the review process works:
+
+```mermaid
+flowchart TB
+    subgraph Inputs["Input Phase (Week 1-2)"]
+        A[Employee<br/>Self-Assessment<br/>30-45 min]
+        B[Peers<br/>360 Surveys<br/>10-15 min each]
+        C[Manager<br/>Ratings & Notes<br/>45-60 min]
+    end
+
+    subgraph AI["AI Processing"]
+        D[AI Review Generator<br/>✨ Synthesizes all inputs]
+    end
+
+    subgraph Review["Review & Calibration (Week 3)"]
+        E[Draft Review]
+        F[Manager Edits]
+        G[Calibration Session]
+    end
+
+    subgraph Output["Final Output (Week 4)"]
+        H[Final Performance Review<br/>✓ Ready for delivery]
+    end
+
+    A --> D
+    B --> D
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+
+    style A fill:#06b6d4,stroke:#0891b2,color:#fff
+    style B fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    style C fill:#f59e0b,stroke:#d97706,color:#fff
+    style D fill:#667eea,stroke:#764ba2,color:#fff
+    style H fill:#10b981,stroke:#059669,color:#fff
+```
+
+**View the interactive diagram:** [Open process-flow.html](../mockups/process-flow.html) in your browser for a detailed visual representation.
+
+---
+
 ## Time Commitment Overview
 
 | Step | Who | Time Required | When |
