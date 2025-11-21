@@ -29,6 +29,7 @@ performance-review/
 │   ├── universal-criteria.md    # Criteria for all roles
 │   ├── framework-overview.md    # System overview
 │   ├── employee-guide.md        # Employee-facing introduction
+│   ├── manager-guide.md         # Manager guide: behavior-based feedback
 │   ├── process-guide.md         # Review process with time estimates
 │   └── 360-feedback-automation.md  # Automated survey generation guide
 ├── rubrics/                     # Role-specific competency rubrics
