@@ -42,9 +42,7 @@ flowchart TB
         C[Manager<br/>Ratings & Notes<br/>45-60 min]
     end
 
-    subgraph AI["AI Processing"]
-        D[AI Review Generator<br/>✨ Synthesizes all inputs]
-    end
+    D[Review Generator<br/>✨ Synthesizes all inputs]
 
     subgraph Review["Review & Calibration (Week 3)"]
         E[Draft Review]
