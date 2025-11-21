@@ -1,0 +1,23 @@
+# Google API Client Libraries
+google-api-python-client==2.108.0
+google-auth-httplib2==0.2.0
+google-auth-oauthlib==1.2.0
+google-auth==2.25.2
+
+# YAML Processing
+PyYAML==6.0.1
+
+# HTTP Requests (for HRIS integrations)
+requests==2.31.0
+
+# Date/Time Utilities
+python-dateutil==2.8.2
+
+# CSV Processing (built-in, listed for documentation)
+# csv - Python standard library
+
+# Optional: Progress Bars for Long Operations
+tqdm==4.66.1
+
+# Optional: Retry Logic for API Calls
+tenacity==8.2.3

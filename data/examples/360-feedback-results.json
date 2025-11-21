@@ -1,0 +1,284 @@
+[
+  {
+    "employee_id": "emp_001",
+    "employee_name": "Sarah Chen",
+    "role": "software_engineer",
+    "level": "ic3",
+    "response_count": 4,
+    "completion_rate": "100%",
+    "ratings": {
+      "craft_quality": {
+        "scores": [4, 4, 4, 3],
+        "average": 3.75,
+        "mode": 4
+      },
+      "speed": {
+        "scores": [4, 3, 4, 4],
+        "average": 3.75,
+        "mode": 4
+      },
+      "adaptiveness": {
+        "scores": [4, 4, 3, 4],
+        "average": 3.75,
+        "mode": 4
+      },
+      "code_quality": {
+        "scores": [4, 4, 4, 4],
+        "average": 4.0,
+        "mode": 4
+      },
+      "technical_problem_solving": {
+        "scores": [4, 3, 4, 3],
+        "average": 3.5,
+        "mode": 4
+      },
+      "system_design": {
+        "scores": [3, 4, 4, 3],
+        "average": 3.5,
+        "mode": 3
+      },
+      "mentoring": {
+        "scores": [4, 4, "N/A", 4],
+        "average": 4.0,
+        "mode": 4,
+        "na_count": 1
+      },
+      "collaboration": {
+        "scores": [4, 4, 4, 4],
+        "average": 4.0,
+        "mode": 4
+      }
+    },
+    "narratives": {
+      "craft_quality": [
+        "Sarah's code is consistently clean and well-documented. She follows team standards and her PRs are easy to review.",
+        "Very thorough in testing. Catches edge cases that others miss.",
+        "High quality work, though sometimes could ship a bit faster with 'good enough' vs perfect.",
+        "Great attention to detail in code reviews and her own implementations."
+      ],
+      "speed": [
+        "Delivers features on time. Proactively asks for help when blocked.",
+        "Could be faster on some tasks, but she's thorough which I appreciate.",
+        "Good pace on most projects. Communicates delays early.",
+        "Solid execution speed. Balances quality and velocity well."
+      ],
+      "mentoring": [
+        "Sarah has been incredibly helpful in onboarding me. She takes time to explain concepts clearly.",
+        "Patient mentor. Helps me understand not just what to do but why.",
+        "Great at giving actionable feedback on my PRs."
+      ],
+      "strengths": [
+        "Strong technical skills, especially in backend systems. Very reliable team member.",
+        "Excellent communicator. Makes complex concepts easy to understand.",
+        "Great at mentoring junior engineers. Creates a supportive environment.",
+        "Consistently delivers high-quality code. Very detail-oriented."
+      ],
+      "development_areas": [
+        "Could take on more system design leadership - has the skills but sometimes defers to others.",
+        "Opportunity to speak up more in architecture discussions.",
+        "Sometimes perfectionism slows down delivery. Could practice 'ship and iterate' more.",
+        "Would benefit from leading a cross-team project to expand influence."
+      ]
+    },
+    "summary": {
+      "overall_rating": 3.75,
+      "all_4s": false,
+      "merit_eligible": false,
+      "areas_below_4": ["system_design", "technical_problem_solving"],
+      "key_strengths": [
+        "Code quality and technical execution",
+        "Mentoring and communication",
+        "Reliability and consistency"
+      ],
+      "key_development_areas": [
+        "System design leadership",
+        "Speaking up in architectural discussions",
+        "Balancing perfection with velocity"
+      ]
+    }
+  },
+  {
+    "employee_id": "emp_007",
+    "employee_name": "Lisa Zhang",
+    "role": "ml_ai_engineer",
+    "level": "ic5",
+    "response_count": 3,
+    "completion_rate": "100%",
+    "ratings": {
+      "craft_quality": {
+        "scores": [4, 4, 4],
+        "average": 4.0,
+        "mode": 4
+      },
+      "speed": {
+        "scores": [4, 4, 4],
+        "average": 4.0,
+        "mode": 4
+      },
+      "adaptiveness": {
+        "scores": [4, 4, 3],
+        "average": 3.67,
+        "mode": 4
+      },
+      "ml_model_development": {
+        "scores": [4, 4, 4],
+        "average": 4.0,
+        "mode": 4
+      },
+      "ml_ops_deployment": {
+        "scores": [4, 4, 4],
+        "average": 4.0,
+        "mode": 4
+      },
+      "research_innovation": {
+        "scores": [4, 4, 4],
+        "average": 4.0,
+        "mode": 4
+      },
+      "technical_leadership": {
+        "scores": [4, 4, 4],
+        "average": 4.0,
+        "mode": 4
+      },
+      "cross_functional_impact": {
+        "scores": [3, 4, 4],
+        "average": 3.67,
+        "mode": 4
+      },
+      "industry_contribution": {
+        "scores": [4, 4, "N/A"],
+        "average": 4.0,
+        "mode": 4,
+        "na_count": 1
+      }
+    },
+    "narratives": {
+      "craft_quality": [
+        "Lisa's work is exemplary. Her models are production-ready and well-documented.",
+        "Sets the standard for ML engineering quality on our team.",
+        "Excellent at balancing research innovation with production requirements."
+      ],
+      "technical_leadership": [
+        "Lisa has been instrumental in defining our ML architecture strategy.",
+        "Natural leader. People seek her input on technical decisions.",
+        "Mentors the entire ML team, not just direct reports."
+      ],
+      "cross_functional_impact": [
+        "Works well with product and engineering teams. Could do more to evangelize ML capabilities to other departments.",
+        "Great collaboration within engineering. Strong partner on platform initiatives.",
+        "Has driven significant impact on our recommendation systems. Would love to see her work more with the growth team."
+      ],
+      "strengths": [
+        "World-class ML engineer. Deep expertise in both theory and practice.",
+        "Exceptional technical leadership. Raises the bar for the entire team.",
+        "Great at translating business problems into ML solutions."
+      ],
+      "development_areas": [
+        "Could expand influence beyond the ML team to other parts of the organization.",
+        "Opportunity to mentor more engineers outside of immediate team.",
+        "Sometimes moves fast on new approaches - more stakeholder communication could help."
+      ]
+    },
+    "summary": {
+      "overall_rating": 3.93,
+      "all_4s": false,
+      "merit_eligible": false,
+      "areas_below_4": ["adaptiveness", "cross_functional_impact"],
+      "key_strengths": [
+        "Technical excellence in ML",
+        "Strong technical leadership",
+        "Innovation and research impact"
+      ],
+      "key_development_areas": [
+        "Cross-functional collaboration beyond engineering",
+        "Stakeholder communication on new initiatives",
+        "Broader organizational influence"
+      ]
+    }
+  },
+  {
+    "employee_id": "emp_015",
+    "employee_name": "Jane Manager",
+    "role": "engineering_manager",
+    "level": "m1",
+    "response_count": 2,
+    "completion_rate": "100%",
+    "ratings": {
+      "craft_quality": {
+        "scores": [4, 4],
+        "average": 4.0,
+        "mode": 4
+      },
+      "speed": {
+        "scores": [4, 3],
+        "average": 3.5,
+        "mode": 4
+      },
+      "adaptiveness": {
+        "scores": [4, 4],
+        "average": 4.0,
+        "mode": 4
+      },
+      "people_management": {
+        "scores": [4, 4],
+        "average": 4.0,
+        "mode": 4
+      },
+      "delivery_management": {
+        "scores": [3, 4],
+        "average": 3.5,
+        "mode": 4
+      },
+      "technical_credibility": {
+        "scores": [4, 4],
+        "average": 4.0,
+        "mode": 4
+      },
+      "team_development": {
+        "scores": [4, 4],
+        "average": 4.0,
+        "mode": 4
+      }
+    },
+    "narratives": {
+      "people_management": [
+        "Jane is an excellent people manager. Her team members consistently grow and thrive.",
+        "Strong 1:1s, clear feedback, supportive environment. Models the kind of manager I aspire to be."
+      ],
+      "delivery_management": [
+        "Team delivers well. Occasionally scope creep happens but Jane adjusts priorities appropriately.",
+        "Good at project execution. Could improve at early risk identification on complex initiatives."
+      ],
+      "team_development": [
+        "Jane's team has the strongest bench of talent. She invests heavily in development.",
+        "Creates growth opportunities for her team. Several promotions under her leadership."
+      ],
+      "strengths": [
+        "Exceptional people leadership. Creates high-performing, happy teams.",
+        "Strong technical background - earns respect from ICs.",
+        "Great at developing talent and managing performance."
+      ],
+      "development_areas": [
+        "Could be more proactive on delivery risks - sometimes waits for issues to surface.",
+        "Opportunity to drive more cross-team initiatives and strategic planning.",
+        "Team execution is strong but could be faster on some deliverables."
+      ]
+    },
+    "summary": {
+      "overall_rating": 3.79,
+      "all_4s": false,
+      "merit_eligible": false,
+      "areas_below_4": ["speed", "delivery_management"],
+      "key_strengths": [
+        "People management excellence",
+        "Team development and growth",
+        "Technical credibility"
+      ],
+      "key_development_areas": [
+        "Proactive delivery risk management",
+        "Cross-team strategic initiatives",
+        "Velocity on complex projects"
+      ]
+    }
+  }
+]

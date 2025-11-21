@@ -1,0 +1,116 @@
+employees:
+  - id: emp_001
+    name: Sarah Chen
+    email: sarah.chen@company.com
+    role: software_engineer
+    level: ic3
+    manager_email: jane.manager@company.com
+    competencies:
+      - code_quality
+      - technical_problem_solving
+      - system_design
+      - mentoring
+      - collaboration
+
+  - id: emp_002
+    name: John Doe
+    email: john.doe@company.com
+    role: data_engineer
+    level: ic2
+    manager_email: jane.manager@company.com
+    competencies:
+      - data_pipeline_quality
+      - data_modeling
+      - sql_proficiency
+      - collaboration
+
+  - id: emp_003
+    name: Alice Johnson
+    email: alice.johnson@company.com
+    role: software_engineer
+    level: ic4
+    manager_email: jane.manager@company.com
+    competencies:
+      - code_quality
+      - technical_problem_solving
+      - system_design
+      - architecture_leadership
+      - mentoring
+      - technical_influence
+
+  - id: emp_007
+    name: Lisa Zhang
+    email: lisa.zhang@company.com
+    role: ml_ai_engineer
+    level: ic5
+    manager_email: jane.manager@company.com
+    competencies:
+      - ml_model_development
+      - ml_ops_deployment
+      - research_innovation
+      - technical_leadership
+      - cross_functional_impact
+      - industry_contribution
+
+  - id: emp_010
+    name: Tom Anderson
+    email: tom.anderson@company.com
+    role: security_engineer
+    level: ic4
+    manager_email: mark.manager@company.com
+    competencies:
+      - security_architecture
+      - threat_modeling
+      - incident_response
+      - security_tooling
+      - security_advocacy
+      - compliance
+
+  - id: emp_015
+    name: Jane Manager
+    email: jane.manager@company.com
+    role: engineering_manager
+    level: m1
+    manager_email: cto@company.com
+    competencies:
+      - people_management
+      - delivery_management
+      - technical_credibility
+      - team_development
+
+peer_assignments:
+  # Sarah Chen (IC3 Software Engineer) reviewed by 4 peers
+  emp_001:
+    - emp_002  # John (Data Engineer IC2) - cross-functional collaboration
+    - emp_003  # Alice (Software Engineer IC4) - senior peer on team
+    - emp_004  # Bob (DevOps IC3) - works together on deployments
+    - emp_005  # Emma (Software Engineer IC2) - junior she mentors
+
+  # John Doe (IC2 Data Engineer) reviewed by 3 peers
+  emp_002:
+    - emp_001  # Sarah (Software Engineer IC3)
+    - emp_003  # Alice (Software Engineer IC4)
+    - emp_006  # Michael (QA Engineer IC3)
+
+  # Alice Johnson (IC4 Software Engineer) reviewed by 3 peers
+  emp_003:
+    - emp_001  # Sarah (Software Engineer IC3)
+    - emp_002  # John (Data Engineer IC2)
+    - emp_007  # Lisa (ML/AI Engineer IC5) - cross-team collaboration
+
+  # Lisa Zhang (IC5 ML/AI Engineer) reviewed by 3 peers
+  emp_007:
+    - emp_003  # Alice (Software Engineer IC4)
+    - emp_008  # David (ML/AI Engineer IC3)
+    - emp_009  # Rachel (Data Engineer IC4)
+
+  # Tom Anderson (IC4 Security Engineer) reviewed by 3 peers
+  emp_010:
+    - emp_011  # Sophie (Security Engineer IC3)
+    - emp_012  # James (DevOps IC4) - security + infrastructure collaboration
+    - emp_013  # Nina (Software Engineer IC5) - senior engineer perspective
+
+  # Jane Manager (M1 Engineering Manager) reviewed by 2 peer managers + skip level
+  emp_015:
+    - emp_016  # Mark Manager (M1) - peer manager
+    - emp_017  # Susan Director (M3) - skip level feedback

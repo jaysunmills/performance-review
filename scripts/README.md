@@ -1,0 +1,392 @@
+# 360 Feedback Automation Scripts
+
+This directory contains Python scripts for automating the 360 feedback collection process using Google Forms API.
+
+## Overview
+
+The automation workflow consists of 4 phases:
+
+1. **Data Preparation** - Load employee roster and map to competencies
+2. **Survey Generation** - Create role-specific Google Forms programmatically
+3. **Survey Distribution** - Email surveys to peers via Gmail API
+4. **Response Collection** - Aggregate feedback responses for manager review
+
+## Prerequisites
+
+### 1. Google Cloud Setup
+
+1. Create a Google Cloud Project at [console.cloud.google.com](https://console.cloud.google.com)
+2. Enable the following APIs:
+   - Google Forms API
+   - Gmail API (for survey distribution)
+   - Google Drive API (for form storage)
+3. Create a Service Account:
+   - Go to "IAM & Admin" > "Service Accounts"
+   - Create new service account with appropriate permissions
+   - Generate and download JSON key file
+4. Save credentials as `credentials/service-account.json` (this file is gitignored)
+
+### 2. Python Environment
+
+Install required dependencies:
+
+```bash
+pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib pyyaml
+```
+
+Or use the requirements file:
+
+```bash
+pip install -r scripts/requirements.txt
+```
+
+### 3. Employee Roster Data
+
+Prepare your employee data in one of these formats:
+
+- **CSV**: `data/employee-roster.csv` (see `data/examples/employee-roster.csv`)
+- **YAML**: `data/employee-roster.yaml`
+- **API**: Integrate with your HRIS (BambooHR, Workday, etc.)
+
+Required fields:
+- `id` - Unique employee identifier
+- `name` - Full name
+- `email` - Work email address
+- `role` - Role key from `data/roles.yaml`
+- `level` - Level key (ic1, ic2, m1, etc.)
+- `manager_email` - Manager's email
+- `peer_ids` - Semicolon-separated list of peer IDs for 360 reviews
+
+## Usage
+
+### Phase 1: Prepare Data
+
+```bash
+python scripts/prepare-roster.py
+```
+
+**What it does:**
+- Loads employee roster from CSV/YAML
+- Maps each employee to their role-specific competencies
+- Generates peer review assignments
+- Outputs: `data/360-assignments.yaml`
+
+**Customization:**
+Edit the script to change peer assignment logic:
+- Use pre-defined peer lists
+- Auto-assign based on team/manager
+- Use collaboration data (Git commits, Slack, Jira)
+
+### Phase 2: Generate Surveys
+
+```bash
+python scripts/generate-surveys.py
+```
+
+**What it does:**
+- Creates a Google Form for each employee
+- Adds universal criteria questions (Craft, Speed, Adaptiveness)
+- Adds role-specific competency questions
+- Configures form settings (1 response per person, require sign-in)
+- Outputs: `data/generated-forms.yaml` (form IDs and URLs)
+
+**Time estimate:** ~5 minutes for 50 employees (API creates forms quickly)
+
+**Generated form structure:**
+1. Instructions section
+2. Universal criteria (3 questions × 2 fields = 6 fields)
+   - Rating (1-4 scale)
+   - Evidence (optional text)
+3. Role-specific competencies (varies by role/level)
+   - Rating (1-4 scale + N/A option)
+   - Evidence (optional text)
+4. Overall feedback
+   - Strengths (text)
+   - Development areas (text)
+
+### Phase 3: Distribute Surveys
+
+```bash
+python scripts/distribute-surveys.py
+```
+
+**What it does:**
+- Reads peer assignments from `data/360-assignments.yaml`
+- Sends personalized email to each reviewer via Gmail API
+- Includes survey link with tracking parameters
+- Outputs: Email confirmation logs
+
+**Email template includes:**
+- Who they're reviewing
+- Survey link
+- Time estimate (10-15 minutes)
+- Deadline (typically 1 week)
+- Anonymity/confidentiality notice
+
+**Customization:**
+- Edit email template in `create_survey_email()` function
+- Add company branding
+- Customize deadline date
+- Add reminder logic
+
+### Phase 4: Collect Responses
+
+```bash
+python scripts/collect-responses.py
+```
+
+**What it does:**
+- Fetches responses from all generated forms
+- Parses and aggregates ratings by competency
+- Calculates averages, modes, completion rates
+- Exports structured JSON for manager review tool
+- Outputs: `data/360-feedback-results.json`
+
+**Output format:**
+```json
+{
+  "employee_id": "emp_001",
+  "employee_name": "Sarah Chen",
+  "response_count": 4,
+  "ratings": {
+    "craft_quality": {
+      "scores": [4, 4, 3, 4],
+      "average": 3.75,
+      "mode": 4
+    }
+  },
+  "narratives": {
+    "craft_quality": ["...", "...", "..."]
+  }
+}
+```
+
+## File Structure
+
+```
+scripts/
+├── README.md                    # This file
+├── requirements.txt             # Python dependencies
+├── prepare-roster.py            # Phase 1: Data preparation
+├── generate-surveys.py          # Phase 2: Form generation
+├── distribute-surveys.py        # Phase 3: Email distribution
+└── collect-responses.py         # Phase 4: Response aggregation
+
+credentials/
+└── service-account.json         # Google Cloud credentials (gitignored)
+
+data/
+├── employee-roster.csv          # Input: Your employee data
+├── 360-assignments.yaml         # Generated by Phase 1
+├── generated-forms.yaml         # Generated by Phase 2
+├── 360-feedback-results.json    # Generated by Phase 4
+└── examples/                    # Sample data files
+    ├── employee-roster.csv
+    ├── 360-assignments.yaml
+    └── 360-feedback-results.json
+```
+
+## Security Best Practices
+
+1. **Never commit credentials** - Add `credentials/` to `.gitignore`
+2. **Limit API scopes** - Only request minimum required permissions
+3. **Use service accounts** - Don't use personal Google accounts for automation
+4. **Enable 2FA** - On all admin accounts with API access
+5. **Rotate credentials** - Periodically regenerate service account keys
+6. **Audit access** - Review who has access to form responses
+7. **Domain restrictions** - Configure forms to only accept company email addresses
+
+## Anonymity & Privacy
+
+### Option 1: Anonymous Feedback
+- Do NOT collect email addresses in forms
+- Aggregate responses (minimum 3-4 before showing to manager)
+- Use tracking parameters only for completion monitoring
+
+### Option 2: Attributed Feedback
+- Collect email addresses to identify reviewers
+- Useful for follow-up questions or verification
+- Clearly communicate attribution policy to participants
+
+**Recommendation:** Start with anonymous, evaluate based on organizational culture.
+
+## Troubleshooting
+
+### API Authentication Errors
+
+```
+google.auth.exceptions.DefaultCredentialsError
+```
+
+**Solution:** Ensure `credentials/service-account.json` exists and has correct permissions.
+
+### Rate Limit Errors
+
+```
+googleapiclient.errors.HttpError: 429 Too Many Requests
+```
+
+**Solution:** Add retry logic with exponential backoff. Forms API limit is 300 requests/minute.
+
+### Form Access Denied
+
+```
+Permission denied when accessing form
+```
+
+**Solution:**
+- Check service account has domain-wide delegation enabled
+- Verify OAuth scopes are correctly configured
+- Ensure forms are shared with appropriate users
+
+### Email Delivery Failures
+
+```
+Gmail API 403: Insufficient permissions
+```
+
+**Solution:**
+- Verify Gmail API is enabled in Google Cloud Console
+- Check service account has `gmail.send` scope
+- Consider using SMTP as alternative (smtp.gmail.com)
+
+## Customization Examples
+
+### Add Custom Questions
+
+Edit `generate-surveys.py` to add company-specific questions:
+
+```python
+# Add a custom question about collaboration
+requests.append({
+    "createItem": {
+        "item": {
+            "title": "Cross-team Collaboration",
+            "description": "How well does this person work with other teams?",
+            "questionItem": {
+                "question": {
+                    "required": True,
+                    "choiceQuestion": {
+                        "type": "RADIO",
+                        "options": [
+                            {"value": "4 - Exceptional"},
+                            {"value": "3 - Good"},
+                            {"value": "2 - Needs work"},
+                            {"value": "1 - Poor"}
+                        ]
+                    }
+                }
+            }
+        },
+        "location": {"index": question_index}
+    }
+})
+```
+
+### Integrate with HRIS
+
+Replace CSV loading with API calls:
+
+```python
+import requests
+
+def load_employee_roster_from_bamboohr(api_key: str) -> List[Dict]:
+    """Fetch employee data from BambooHR API"""
+    headers = {"Authorization": f"Bearer {api_key}"}
+    response = requests.get(
+        "https://api.bamboohr.com/api/gateway.php/company/v1/employees/directory",
+        headers=headers
+    )
+    return response.json()
+```
+
+### Automated Reminders
+
+Add a cron job to check completion and send reminders:
+
+```python
+def send_reminder_emails():
+    """Send reminder to reviewers who haven't completed surveys"""
+    # Check form response counts
+    # Compare with expected peer_assignments
+    # Email those who haven't responded
+    pass
+```
+
+## Testing
+
+### Test with Small Dataset
+
+Before running on full organization:
+
+1. Create test employee roster with 5-10 employees
+2. Use test Google accounts (not real company accounts)
+3. Verify end-to-end workflow
+4. Check form questions render correctly
+5. Validate response aggregation logic
+
+### Dry Run Mode
+
+Add a `--dry-run` flag to scripts:
+
+```python
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--dry-run', action='store_true',
+                    help='Preview actions without executing')
+args = parser.parse_args()
+
+if args.dry_run:
+    print(f"Would create form for {employee['name']}")
+else:
+    create_360_form(service, employee, competencies)
+```
+
+## Performance Optimization
+
+### Batch API Requests
+
+Use `batchUpdate()` instead of individual `update()` calls:
+
+```python
+# ❌ Slow - individual requests
+for question in questions:
+    service.forms().batchUpdate(formId=form_id, body={"requests": [question]})
+
+# ✅ Fast - batch request
+service.forms().batchUpdate(formId=form_id, body={"requests": questions})
+```
+
+### Parallel Processing
+
+Use `concurrent.futures` for parallel form creation:
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+
+with ThreadPoolExecutor(max_workers=10) as executor:
+    futures = [
+        executor.submit(create_360_form, service, emp, emp['competencies'])
+        for emp in employees
+    ]
+    results = [f.result() for f in futures]
+```
+
+## Support & Resources
+
+- [Google Forms API Documentation](https://developers.google.com/forms/api)
+- [Gmail API Documentation](https://developers.google.com/gmail/api)
+- [Service Account Setup Guide](https://cloud.google.com/iam/docs/service-accounts-create)
+- [OAuth 2.0 Scopes](https://developers.google.com/identity/protocols/oauth2/scopes)
+
+## Next Steps
+
+After setting up automation:
+
+1. **Test with pilot group** (10-15 employees)
+2. **Gather feedback** on survey length, question clarity
+3. **Refine competency questions** based on pilot results
+4. **Scale to full organization**
+5. **Integrate with manager review tool** (`mockups/review-tool.html`)
+6. **Set up monitoring** for completion rates and response quality

@@ -47,6 +47,21 @@ __pycache__/
 .env.local
 .env.*.local
 
+# Google Cloud credentials (NEVER commit these!)
+credentials/
+service-account.json
+*.json.key
+
+# Actual employee data (sensitive - examples are OK)
+data/employee-roster.csv
+data/employee-roster.yaml
+data/360-assignments.yaml
+data/generated-forms.yaml
+data/360-feedback-results.json
+
+# But allow example data
+!data/examples/
+
 # Completed reviews (these may contain sensitive info)
 # Uncomment if you want to exclude actual reviews
 # reviews/
