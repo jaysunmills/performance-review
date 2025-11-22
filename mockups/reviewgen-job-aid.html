@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewGen Job Aid - Mockup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .drop-zone {
+            border: 2px dashed #cbd5e1;
+            transition: all 0.3s;
+        }
+        .drop-zone:hover {
+            border-color: #6366f1;
+            background-color: #f8fafc;
+        }
+        .drop-zone.active {
+            border-color: #6366f1;
+            background-color: #eef2ff;
+        }
+        .file-item {
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-7xl mx-auto p-6">
+        <!-- Header -->
+        <header class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <h1 class="text-3xl font-bold text-gray-900">
+                    📝 ReviewGen Job Aid
+                </h1>
+                <div class="flex items-center gap-4">
+                    <!-- Model Selector -->
+                    <div class="flex flex-col">
+                        <label class="text-sm font-medium text-gray-700 mb-1">AI Model</label>
+                        <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                            <option>OpenAI (GPT-4o)</option>
+                            <option>Anthropic (Claude 3.5 Sonnet)</option>
+                        </select>
+                    </div>
+
+                    <!-- API Key Input -->
+                    <div class="flex flex-col">
+                        <label class="text-sm font-medium text-gray-700 mb-1">API Key</label>
+                        <input
+                            type="password"
+                            placeholder="Enter your API key"
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-64"
+                        />
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Data Collection Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <!-- Zone 1: Peer Feedback -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Peer Feedback
+                </h2>
+                <div class="drop-zone rounded-lg p-8 text-center cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-gray-400 mb-3">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p class="text-sm text-gray-600 mb-1">Drag & drop peer feedback files</p>
+                    <p class="text-xs text-gray-400">or click to browse</p>
+                    <p class="text-xs text-gray-500 mt-2">Accepts: .pdf, .docx (multiple files)</p>
+                </div>
+
+                <!-- Sample uploaded files -->
+                <div class="mt-4 space-y-2">
+                    <div class="file-item flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                            <span class="text-sm text-gray-700">peer_feedback_alice.pdf</span>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="file-item flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                            <span class="text-sm text-gray-700">peer_feedback_bob.docx</span>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zone 2: Self Review -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Self Review
+                </h2>
+                <div class="drop-zone rounded-lg p-8 text-center cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-gray-400 mb-3">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p class="text-sm text-gray-600 mb-1">Drag & drop self review file</p>
+                    <p class="text-xs text-gray-400">or click to browse</p>
+                    <p class="text-xs text-gray-500 mt-2">Accepts: .pdf, .docx (single file)</p>
+                </div>
+
+                <!-- Sample uploaded file -->
+                <div class="mt-4">
+                    <div class="file-item flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                            <span class="text-sm text-gray-700">self_review_john.docx</span>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zone 3: Manager Notes -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                    Manager Notes
+                </h2>
+                <textarea
+                    class="w-full h-40 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+                    placeholder="Type your observations, ratings, and key points here..."
+                >John has consistently demonstrated strong technical leadership this quarter. His work on the authentication refactor was excellent - clean code, comprehensive tests, and clear documentation.</textarea>
+
+                <!-- Preserve Verbatim Checkbox -->
+                <div class="mt-4 p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" class="mt-1 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" checked />
+                        <div class="flex-1">
+                            <span class="text-sm font-medium text-gray-900">Preserve text verbatim</span>
+                            <p class="text-xs text-gray-600 mt-1">Do not rewrite or summarize manager notes. Include exactly as written in a "Manager Observations" section.</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Area -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                Generate Performance Review
+            </button>
+        </div>
+
+        <!-- Output Area -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-600">
+                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    Generated Review
+                </h2>
+                <button class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    Copy to Clipboard
+                </button>
+            </div>
+
+            <!-- Sample Generated Output -->
+            <div class="prose max-w-none bg-gray-50 rounded-lg p-6 border border-gray-200">
+                <h1 class="text-2xl font-bold text-gray-900 mb-4">Performance Review: John Doe</h1>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Overall Assessment</h2>
+                <p class="text-gray-700 mb-4">
+                    John has demonstrated exceptional performance this quarter, consistently exceeding expectations across technical execution, collaboration, and leadership. His contributions to the authentication refactor project showcase his growth as a senior engineer.
+                </p>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Key Strengths</h2>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                    <li><strong>Technical Excellence:</strong> Peers consistently praised John's code quality and attention to detail. Alice noted, "John's code reviews are thorough and educational."</li>
+                    <li><strong>Collaboration:</strong> Bob highlighted John's responsiveness and willingness to help: "Always available when I'm blocked on API questions."</li>
+                    <li><strong>Proactive Problem Solving:</strong> In his self-review, John identified and resolved a critical security vulnerability before it reached production.</li>
+                </ul>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Manager Observations</h2>
+                <div class="bg-purple-50 border-l-4 border-purple-600 p-4 rounded">
+                    <p class="text-gray-700 italic">
+                        John has consistently demonstrated strong technical leadership this quarter. His work on the authentication refactor was excellent - clean code, comprehensive tests, and clear documentation.
+                    </p>
+                </div>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Development Areas</h2>
+                <p class="text-gray-700 mb-4">
+                    While John's performance is strong, there are opportunities for continued growth:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                    <li><strong>Cross-team Communication:</strong> Consider presenting technical decisions in broader team forums to increase visibility and influence.</li>
+                    <li><strong>Mentoring:</strong> With his technical expertise, John could have greater impact by formally mentoring junior engineers.</li>
+                </ul>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Next Steps</h2>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2">
+                    <li>Lead a lunch-and-learn session on authentication best practices</li>
+                    <li>Take on a formal mentorship role with one junior engineer</li>
+                    <li>Present architectural decisions to the broader engineering team monthly</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple interactivity for mockup
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.addEventListener('click', () => {
+                alert('In the real app, this would open a file picker dialog');
+            });
+
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('active');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('active');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('active');
+                alert('Files dropped! In the real app, these would be parsed locally.');
+            });
+        });
+    </script>
+</body>
+</html>
