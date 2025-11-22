@@ -83,10 +83,6 @@
             border-radius: 50%;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        .rating-label {
-            font-size: 11px;
-            color: #6b7280;
-        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -120,9 +116,9 @@
             </div>
         </header>
 
-        <!-- Data Collection Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <!-- Zone 1: Peer Feedback -->
+        <!-- Top Row: Peer Feedback + Self Review -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <!-- Zone 1: Peer Feedback / 360 -->
             <div class="bg-white rounded-lg shadow-sm p-6">
                 <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
@@ -131,7 +127,7 @@
                         <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg>
-                    Peer Feedback
+                    360 Peer Feedback
                 </h2>
                 <div class="drop-zone rounded-lg p-8 text-center cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-gray-400 mb-3">
@@ -168,6 +164,21 @@
                                 <polyline points="14 2 14 8 20 8"></polyline>
                             </svg>
                             <span class="text-sm text-gray-700">peer_bob.docx</span>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="file-item flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                            <span class="text-sm text-gray-700">peer_carol.txt</span>
                         </div>
                         <button class="text-red-500 hover:text-red-700">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -218,169 +229,173 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Zone 3: Manager Review -->
-            <div class="bg-white rounded-lg shadow-sm p-6">
-                <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M15 11a4 4 0 0 0 0-8"></path>
-                    </svg>
-                    Manager Review
-                </h2>
+        <!-- Manager Review - Full Width with 2-Column Internal Layout -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M15 11a4 4 0 0 0 0-8"></path>
+                </svg>
+                Manager Review
+            </h2>
 
-                <!-- Option: Upload existing review file -->
-                <div class="mb-4">
-                    <div class="drop-zone rounded-lg p-6 text-center cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-gray-400 mb-2">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Left Side: Upload Option -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-700 mb-3">Option 1: Upload Existing Review</h3>
+                    <div class="drop-zone rounded-lg p-8 text-center cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-gray-400 mb-3">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                             <polyline points="17 8 12 3 7 8"></polyline>
                             <line x1="12" y1="3" x2="12" y2="15"></line>
                         </svg>
-                        <p class="text-xs text-gray-600 mb-1">Upload existing review</p>
-                        <p class="text-xs text-gray-500">(.pdf, .docx, .txt)</p>
+                        <p class="text-sm text-gray-600 mb-1">Drag & drop existing review file</p>
+                        <p class="text-xs text-gray-400">or click to browse</p>
+                        <p class="text-xs text-gray-500 mt-2">Accepts: .pdf, .docx, .txt</p>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" class="mt-0.5 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" checked />
+                            <div class="flex-1">
+                                <span class="text-sm font-medium text-gray-900">Preserve notes verbatim</span>
+                                <p class="text-xs text-gray-600 mt-1">Include notes exactly as written in a "Manager Observations" section</p>
+                            </div>
+                        </label>
                     </div>
                 </div>
 
-                <div class="text-center text-xs text-gray-500 mb-4">— OR rate competencies —</div>
+                <!-- Right Side: Competency Sliders -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-700 mb-3">Option 2: Rate Competencies</h3>
+                    <div class="space-y-4 max-h-[500px] overflow-y-auto pr-2">
+                        <!-- Universal Criteria -->
+                        <div class="border-b border-gray-200 pb-4">
+                            <h4 class="text-xs font-semibold text-gray-700 mb-3 uppercase">Universal Criteria</h4>
 
-                <!-- Competency Ratings -->
-                <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
-                    <!-- Universal Criteria -->
-                    <div class="border-b border-gray-200 pb-3">
-                        <h3 class="text-xs font-semibold text-gray-700 mb-2">UNIVERSAL CRITERIA</h3>
+                            <!-- Craft/Quality -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">Craft/Quality</label>
+                                    <span class="text-sm font-bold text-green-600">4</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2">
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes...">Excellent code quality. Clean, well-tested, maintainable.</textarea>
+                                </details>
+                            </div>
 
-                        <!-- Craft/Quality -->
-                        <div class="mb-3">
-                            <div class="flex items-center justify-between mb-1">
-                                <label class="text-sm font-medium text-gray-700">Craft/Quality</label>
-                                <span class="text-sm font-bold text-indigo-600">4</span>
+                            <!-- Speed -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">Speed</label>
+                                    <span class="text-sm font-bold text-green-600">4</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2">
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes..."></textarea>
+                                </details>
                             </div>
-                            <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
-                            <div class="flex justify-between text-xs text-gray-500 mt-1">
-                                <span>1</span>
-                                <span>2</span>
-                                <span>3</span>
-                                <span>4</span>
+
+                            <!-- Adaptiveness -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">Adaptiveness</label>
+                                    <span class="text-sm font-bold text-green-600">4</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2">
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes..."></textarea>
+                                </details>
                             </div>
-                            <details class="mt-2">
-                                <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
-                                <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes for this competency...">Excellent code quality. Clean, well-tested, maintainable.</textarea>
-                            </details>
                         </div>
 
-                        <!-- Speed -->
-                        <div class="mb-3">
-                            <div class="flex items-center justify-between mb-1">
-                                <label class="text-sm font-medium text-gray-700">Speed</label>
-                                <span class="text-sm font-bold text-indigo-600">4</span>
-                            </div>
-                            <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
-                            <div class="flex justify-between text-xs text-gray-500 mt-1">
-                                <span>1</span>
-                                <span>2</span>
-                                <span>3</span>
-                                <span>4</span>
-                            </div>
-                            <details class="mt-2">
-                                <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
-                                <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes for this competency..."></textarea>
-                            </details>
-                        </div>
-
-                        <!-- Adaptiveness -->
+                        <!-- Role-Specific Competencies -->
                         <div>
-                            <div class="flex items-center justify-between mb-1">
-                                <label class="text-sm font-medium text-gray-700">Adaptiveness</label>
-                                <span class="text-sm font-bold text-indigo-600">4</span>
+                            <h4 class="text-xs font-semibold text-gray-700 mb-3 uppercase">Role-Specific (Staff SWE)</h4>
+
+                            <!-- Code Quality -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">Code Quality</label>
+                                    <span class="text-sm font-bold text-green-600">4</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2">
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes..."></textarea>
+                                </details>
                             </div>
-                            <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
-                            <div class="flex justify-between text-xs text-gray-500 mt-1">
-                                <span>1</span>
-                                <span>2</span>
-                                <span>3</span>
-                                <span>4</span>
+
+                            <!-- System Design -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">System Design</label>
+                                    <span class="text-sm font-bold text-green-600">4</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2">
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes..."></textarea>
+                                </details>
                             </div>
-                            <details class="mt-2">
-                                <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
-                                <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes for this competency..."></textarea>
-                            </details>
+
+                            <!-- Mentoring -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">Mentoring</label>
+                                    <span class="text-sm font-bold text-orange-500">3</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="3" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2" open>
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes...">Good mentoring but could be more proactive. Suggest formal mentorship role.</textarea>
+                                </details>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Role-Specific Competencies -->
-                    <div>
-                        <h3 class="text-xs font-semibold text-gray-700 mb-2">ROLE-SPECIFIC (Staff SWE)</h3>
-
-                        <!-- Code Quality -->
-                        <div class="mb-3">
-                            <div class="flex items-center justify-between mb-1">
-                                <label class="text-sm font-medium text-gray-700">Code Quality</label>
-                                <span class="text-sm font-bold text-indigo-600">4</span>
-                            </div>
-                            <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
-                            <div class="flex justify-between text-xs text-gray-500 mt-1">
-                                <span>1</span>
-                                <span>2</span>
-                                <span>3</span>
-                                <span>4</span>
-                            </div>
-                            <details class="mt-2">
-                                <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
-                                <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes for this competency..."></textarea>
-                            </details>
-                        </div>
-
-                        <!-- System Design -->
-                        <div class="mb-3">
-                            <div class="flex items-center justify-between mb-1">
-                                <label class="text-sm font-medium text-gray-700">System Design</label>
-                                <span class="text-sm font-bold text-indigo-600">4</span>
-                            </div>
-                            <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
-                            <div class="flex justify-between text-xs text-gray-500 mt-1">
-                                <span>1</span>
-                                <span>2</span>
-                                <span>3</span>
-                                <span>4</span>
-                            </div>
-                            <details class="mt-2">
-                                <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
-                                <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes for this competency..."></textarea>
-                            </details>
-                        </div>
-
-                        <!-- Mentoring -->
-                        <div>
-                            <div class="flex items-center justify-between mb-1">
-                                <label class="text-sm font-medium text-gray-700">Mentoring</label>
-                                <span class="text-sm font-bold text-orange-500">3</span>
-                            </div>
-                            <input type="range" min="1" max="4" value="3" step="1" class="w-full" />
-                            <div class="flex justify-between text-xs text-gray-500 mt-1">
-                                <span>1</span>
-                                <span>2</span>
-                                <span>3</span>
-                                <span>4</span>
-                            </div>
-                            <details class="mt-2" open>
-                                <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
-                                <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes for this competency...">Good mentoring but could be more proactive. Suggest formal mentorship role.</textarea>
-                            </details>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Preserve Verbatim Checkbox -->
-                <div class="mt-4 p-3 bg-purple-50 border border-purple-200 rounded-lg">
-                    <label class="flex items-start gap-2 cursor-pointer">
-                        <input type="checkbox" class="mt-0.5 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" checked />
-                        <div class="flex-1">
-                            <span class="text-xs font-medium text-gray-900">Preserve notes verbatim</span>
-                            <p class="text-xs text-gray-600 mt-0.5">Include notes exactly as written</p>
-                        </div>
-                    </label>
                 </div>
             </div>
         </div>
@@ -476,8 +491,8 @@
 
                 <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Key Strengths</h2>
                 <ul class="list-disc pl-6 text-gray-700 space-y-2">
-                    <li><strong>Technical Excellence:</strong> Peers consistently praised John's code quality and attention to detail. Alice noted, "John's code reviews are thorough and educational."</li>
-                    <li><strong>Collaboration:</strong> Bob highlighted John's responsiveness: "Always available when I'm blocked on API questions."</li>
+                    <li><strong>Technical Excellence:</strong> Peers consistently praised John's code quality. Alice noted, "John's code reviews are thorough and educational."</li>
+                    <li><strong>Collaboration:</strong> Bob highlighted responsiveness: "Always available when I'm blocked on API questions."</li>
                     <li><strong>System Thinking:</strong> Successfully architected the new authentication system with scalability and security in mind.</li>
                 </ul>
 
@@ -491,9 +506,7 @@
                 <p class="text-gray-700 mb-3">
                     <strong>Mentoring (Rating: 3)</strong> - While John provides helpful guidance when asked, there's an opportunity to be more proactive in mentoring junior engineers.
                 </p>
-                <p class="text-gray-700 mb-4">
-                    <strong>Recommended actions:</strong>
-                </p>
+                <p class="text-gray-700 mb-4"><strong>Recommended actions:</strong></p>
                 <ol class="list-decimal pl-6 text-gray-700 space-y-2">
                     <li>Take on a formal mentorship role with one junior engineer in Q1 2025</li>
                     <li>Lead a lunch-and-learn session on authentication best practices</li>
