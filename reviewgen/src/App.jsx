@@ -308,8 +308,8 @@ function App() {
           </div>
         </div>
 
-        {/* Top Row: Peer Feedback + Self Review */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        {/* File Uploads - All three dropboxes in a row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           {/* 360 Peer Feedback */}
           <div className="bg-white rounded-lg shadow-sm p-6">
             <h2 className="text-xl font-semibold text-gray-800 mb-4">360 Peer Feedback</h2>
@@ -370,133 +370,128 @@ function App() {
               </div>
             )}
           </div>
+
+          {/* Manager Review */}
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Manager Review</h2>
+            <div
+              {...getManagerRootProps()}
+              className={`drop-zone ${isManagerDragActive ? 'active' : ''}`}
+            >
+              <input {...getManagerInputProps()} />
+              <svg className="mx-auto h-12 w-12 text-gray-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              <p className="text-sm text-gray-600">Drag & drop manager notes</p>
+              <p className="text-xs text-gray-500 mt-1">Supports: .pdf, .docx, .txt (single file)</p>
+            </div>
+            {managerFile && (
+              <div className="file-list">
+                <div className="file-item">
+                  <span className="text-sm text-gray-700">{managerFile.filename}</span>
+                  <button
+                    onClick={removeManagerFile}
+                    className="text-red-500 hover:text-red-700 text-sm"
+                  >
+                    Remove
+                  </button>
+                </div>
+                <div className="mt-3">
+                  <label className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={preserveVerbatim}
+                      onChange={(e) => setPreserveVerbatim(e.target.checked)}
+                      className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                    />
+                    <span className="text-sm text-gray-700">Preserve notes verbatim</span>
+                  </label>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Manager Review - Full Width */}
+        {/* Competency Ratings - Separate section below */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-6">Manager Review</h2>
+          <h2 className="text-xl font-semibold text-gray-800 mb-6">Competency Ratings</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Left: Upload Option */}
+            {/* Universal Criteria */}
             <div>
-              <h3 className="text-lg font-medium text-gray-700 mb-4">Option 1: Upload Existing Review</h3>
-              <div
-                {...getManagerRootProps()}
-                className={`drop-zone ${isManagerDragActive ? 'active' : ''}`}
-              >
-                <input {...getManagerInputProps()} />
-                <svg className="mx-auto h-12 w-12 text-gray-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                </svg>
-                <p className="text-sm text-gray-600">Drag & drop manager notes</p>
-                <p className="text-xs text-gray-500 mt-1">Supports: .pdf, .docx, .txt (single file)</p>
-              </div>
-              {managerFile && (
-                <div className="file-list">
-                  <div className="file-item">
-                    <span className="text-sm text-gray-700">{managerFile.filename}</span>
-                    <button
-                      onClick={removeManagerFile}
-                      className="text-red-500 hover:text-red-700 text-sm"
-                    >
-                      Remove
-                    </button>
+              <h3 className="text-lg font-medium text-gray-700 mb-4">Universal Criteria</h3>
+              {UNIVERSAL_CRITERIA.map(comp => (
+                <div key={comp.id} className="mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-sm font-medium text-gray-700">{comp.name}</label>
+                    <span className={`text-sm font-bold ${RATING_LABELS[ratings[comp.id].rating].color}`}>
+                      {ratings[comp.id].rating} - {RATING_LABELS[ratings[comp.id].rating].label}
+                    </span>
                   </div>
-                  <div className="mt-3">
-                    <label className="flex items-center space-x-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={preserveVerbatim}
-                        onChange={(e) => setPreserveVerbatim(e.target.checked)}
-                        className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                      />
-                      <span className="text-sm text-gray-700">Preserve notes verbatim (include exactly as written)</span>
-                    </label>
+                  <input
+                    type="range"
+                    min="1"
+                    max="4"
+                    value={ratings[comp.id].rating}
+                    onChange={(e) => handleRatingChange(comp.id, e.target.value)}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
                   </div>
+                  <details className="mt-2">
+                    <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                    <textarea
+                      value={ratings[comp.id].notes}
+                      onChange={(e) => handleNotesChange(comp.id, e.target.value)}
+                      className="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500"
+                      rows="2"
+                      placeholder="Optional notes..."
+                    />
+                  </details>
                 </div>
-              )}
+              ))}
             </div>
 
-            {/* Right: Competency Sliders */}
+            {/* Role-Specific Competencies */}
             <div>
-              <h3 className="text-lg font-medium text-gray-700 mb-4">Option 2: Rate Competencies</h3>
-
-              {/* Universal Criteria */}
-              <div className="mb-6">
-                <h4 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Universal Criteria</h4>
-                {UNIVERSAL_CRITERIA.map(comp => (
-                  <div key={comp.id} className="mb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-sm font-medium text-gray-700">{comp.name}</label>
-                      <span className={`text-sm font-bold ${RATING_LABELS[ratings[comp.id].rating].color}`}>
-                        {ratings[comp.id].rating} - {RATING_LABELS[ratings[comp.id].rating].label}
-                      </span>
-                    </div>
-                    <input
-                      type="range"
-                      min="1"
-                      max="4"
-                      value={ratings[comp.id].rating}
-                      onChange={(e) => handleRatingChange(comp.id, e.target.value)}
-                      className="w-full"
-                    />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1 px-1">
-                      <span>1</span>
-                      <span>2</span>
-                      <span>3</span>
-                      <span>4</span>
-                    </div>
-                    <details className="mt-2">
-                      <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
-                      <textarea
-                        value={ratings[comp.id].notes}
-                        onChange={(e) => handleNotesChange(comp.id, e.target.value)}
-                        className="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500"
-                        rows="2"
-                        placeholder="Optional notes..."
-                      />
-                    </details>
+              <h3 className="text-lg font-medium text-gray-700 mb-4">Role-Specific Competencies</h3>
+              {ROLE_SPECIFIC_COMPETENCIES.map(comp => (
+                <div key={comp.id} className="mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="text-sm font-medium text-gray-700">{comp.name}</label>
+                    <span className={`text-sm font-bold ${RATING_LABELS[ratings[comp.id].rating].color}`}>
+                      {ratings[comp.id].rating} - {RATING_LABELS[ratings[comp.id].rating].label}
+                    </span>
                   </div>
-                ))}
-              </div>
-
-              {/* Role-Specific Competencies */}
-              <div>
-                <h4 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Role-Specific Competencies</h4>
-                {ROLE_SPECIFIC_COMPETENCIES.map(comp => (
-                  <div key={comp.id} className="mb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-sm font-medium text-gray-700">{comp.name}</label>
-                      <span className={`text-sm font-bold ${RATING_LABELS[ratings[comp.id].rating].color}`}>
-                        {ratings[comp.id].rating} - {RATING_LABELS[ratings[comp.id].rating].label}
-                      </span>
-                    </div>
-                    <input
-                      type="range"
-                      min="1"
-                      max="4"
-                      value={ratings[comp.id].rating}
-                      onChange={(e) => handleRatingChange(comp.id, e.target.value)}
-                      className="w-full"
-                    />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1 px-1">
-                      <span>1</span>
-                      <span>2</span>
-                      <span>3</span>
-                      <span>4</span>
-                    </div>
-                    <details className="mt-2">
-                      <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
-                      <textarea
-                        value={ratings[comp.id].notes}
-                        onChange={(e) => handleNotesChange(comp.id, e.target.value)}
-                        className="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500"
-                        rows="2"
-                        placeholder="Optional notes..."
-                      />
-                    </details>
+                  <input
+                    type="range"
+                    min="1"
+                    max="4"
+                    value={ratings[comp.id].rating}
+                    onChange={(e) => handleRatingChange(comp.id, e.target.value)}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
                   </div>
-                ))}
-              </div>
+                  <details className="mt-2">
+                    <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                    <textarea
+                      value={ratings[comp.id].notes}
+                      onChange={(e) => handleNotesChange(comp.id, e.target.value)}
+                      className="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500"
+                      rows="2"
+                      placeholder="Optional notes..."
+                    />
+                  </details>
+                </div>
+              ))}
             </div>
           </div>
         </div>
