@@ -1,0 +1,11 @@
+Self-Assessment: Alex Chen - Software Engineer
+
+KEY ACCOMPLISHMENTS:
+1. Led Stripe payment integration - reduced checkout abandonment by 23%
+2. Migrated 15 microservices to new API framework with zero downtime
+3. Mentored 2 junior developers on code quality and testing
+
+AREAS WHERE I STRUGGLED:
+- Took on too many projects simultaneously
+- Need to improve estimation skills for complex projects
+

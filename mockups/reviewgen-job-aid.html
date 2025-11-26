@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewGen Job Aid - Mockup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .drop-zone {
+            border: 2px dashed #cbd5e1;
+            transition: all 0.3s;
+        }
+        .drop-zone:hover {
+            border-color: #6366f1;
+            background-color: #f8fafc;
+        }
+        .drop-zone.active {
+            border-color: #6366f1;
+            background-color: #eef2ff;
+        }
+        .file-item {
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Custom slider styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-track {
+            background: linear-gradient(to right,
+                #ef4444 0%,
+                #ef4444 25%,
+                #f59e0b 25%,
+                #f59e0b 50%,
+                #22c55e 50%,
+                #22c55e 75%,
+                #10b981 75%,
+                #10b981 100%);
+            height: 8px;
+            border-radius: 4px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 20px;
+            width: 20px;
+            background: white;
+            border: 2px solid #6366f1;
+            border-radius: 50%;
+            margin-top: -6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        input[type="range"]::-moz-range-track {
+            background: linear-gradient(to right,
+                #ef4444 0%,
+                #ef4444 25%,
+                #f59e0b 25%,
+                #f59e0b 50%,
+                #22c55e 50%,
+                #22c55e 75%,
+                #10b981 75%,
+                #10b981 100%);
+            height: 8px;
+            border-radius: 4px;
+        }
+        input[type="range"]::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            background: white;
+            border: 2px solid #6366f1;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-7xl mx-auto p-6">
+        <!-- Header -->
+        <header class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="flex items-center justify-between">
+                <h1 class="text-3xl font-bold text-gray-900">
+                    📝 ReviewGen Job Aid
+                </h1>
+                <div class="flex items-center gap-4">
+                    <!-- Model Selector -->
+                    <div class="flex flex-col">
+                        <label class="text-sm font-medium text-gray-700 mb-1">AI Model</label>
+                        <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                            <option>OpenAI (GPT-4o)</option>
+                            <option>Anthropic (Claude 3.5 Sonnet)</option>
+                        </select>
+                    </div>
+
+                    <!-- API Key Input -->
+                    <div class="flex flex-col">
+                        <label class="text-sm font-medium text-gray-700 mb-1">API Key</label>
+                        <input
+                            type="password"
+                            placeholder="Enter your API key"
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-64"
+                        />
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Top Row: Peer Feedback + Self Review -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <!-- Zone 1: Peer Feedback / 360 -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    360 Peer Feedback
+                </h2>
+                <div class="drop-zone rounded-lg p-8 text-center cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-gray-400 mb-3">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p class="text-sm text-gray-600 mb-1">Drag & drop peer feedback files</p>
+                    <p class="text-xs text-gray-400">or click to browse</p>
+                    <p class="text-xs text-gray-500 mt-2">Accepts: .pdf, .docx, .txt (multiple)</p>
+                </div>
+
+                <!-- Sample uploaded files -->
+                <div class="mt-4 space-y-2">
+                    <div class="file-item flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                            <span class="text-sm text-gray-700">peer_alice.pdf</span>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="file-item flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                            <span class="text-sm text-gray-700">peer_bob.docx</span>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="file-item flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                            <span class="text-sm text-gray-700">peer_carol.txt</span>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zone 2: Self Review -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Self Review
+                </h2>
+                <div class="drop-zone rounded-lg p-8 text-center cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-gray-400 mb-3">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p class="text-sm text-gray-600 mb-1">Drag & drop self review file</p>
+                    <p class="text-xs text-gray-400">or click to browse</p>
+                    <p class="text-xs text-gray-500 mt-2">Accepts: .pdf, .docx, .txt (single)</p>
+                </div>
+
+                <!-- Sample uploaded file -->
+                <div class="mt-4">
+                    <div class="file-item flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600">
+                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                            </svg>
+                            <span class="text-sm text-gray-700">self_review_john.docx</span>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manager Review - Full Width with 2-Column Internal Layout -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-600">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M15 11a4 4 0 0 0 0-8"></path>
+                </svg>
+                Manager Review
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Left Side: Upload Option -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-700 mb-3">Option 1: Upload Existing Review</h3>
+                    <div class="drop-zone rounded-lg p-8 text-center cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-gray-400 mb-3">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p class="text-sm text-gray-600 mb-1">Drag & drop existing review file</p>
+                        <p class="text-xs text-gray-400">or click to browse</p>
+                        <p class="text-xs text-gray-500 mt-2">Accepts: .pdf, .docx, .txt</p>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" class="mt-0.5 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" checked />
+                            <div class="flex-1">
+                                <span class="text-sm font-medium text-gray-900">Preserve notes verbatim</span>
+                                <p class="text-xs text-gray-600 mt-1">Include notes exactly as written in a "Manager Observations" section</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Right Side: Competency Sliders -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-700 mb-3">Option 2: Rate Competencies</h3>
+                    <div class="space-y-4 max-h-[500px] overflow-y-auto pr-2">
+                        <!-- Universal Criteria -->
+                        <div class="border-b border-gray-200 pb-4">
+                            <h4 class="text-xs font-semibold text-gray-700 mb-3 uppercase">Universal Criteria</h4>
+
+                            <!-- Craft/Quality -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">Craft/Quality</label>
+                                    <span class="text-sm font-bold text-green-600">4</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2">
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes...">Excellent code quality. Clean, well-tested, maintainable.</textarea>
+                                </details>
+                            </div>
+
+                            <!-- Speed -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">Speed</label>
+                                    <span class="text-sm font-bold text-green-600">4</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2">
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes..."></textarea>
+                                </details>
+                            </div>
+
+                            <!-- Adaptiveness -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">Adaptiveness</label>
+                                    <span class="text-sm font-bold text-green-600">4</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2">
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes..."></textarea>
+                                </details>
+                            </div>
+                        </div>
+
+                        <!-- Role-Specific Competencies -->
+                        <div>
+                            <h4 class="text-xs font-semibold text-gray-700 mb-3 uppercase">Role-Specific (Staff SWE)</h4>
+
+                            <!-- Code Quality -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">Code Quality</label>
+                                    <span class="text-sm font-bold text-green-600">4</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2">
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes..."></textarea>
+                                </details>
+                            </div>
+
+                            <!-- System Design -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">System Design</label>
+                                    <span class="text-sm font-bold text-green-600">4</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="4" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2">
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes..."></textarea>
+                                </details>
+                            </div>
+
+                            <!-- Mentoring -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-700">Mentoring</label>
+                                    <span class="text-sm font-bold text-orange-500">3</span>
+                                </div>
+                                <input type="range" min="1" max="4" value="3" step="1" class="w-full" />
+                                <div class="flex justify-between text-xs text-gray-500 mt-1 px-1">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                </div>
+                                <details class="mt-2" open>
+                                    <summary class="text-xs text-gray-500 cursor-pointer hover:text-gray-700">+ Add notes (optional)</summary>
+                                    <textarea class="w-full mt-2 p-2 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-indigo-500" rows="2" placeholder="Optional notes...">Good mentoring but could be more proactive. Suggest formal mentorship role.</textarea>
+                                </details>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Area -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                Generate Performance Review
+            </button>
+        </div>
+
+        <!-- Output Area -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-600">
+                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    Generated Review
+                </h2>
+                <button class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    Copy to Clipboard
+                </button>
+            </div>
+
+            <!-- Sample Generated Output -->
+            <div class="prose max-w-none bg-gray-50 rounded-lg p-6 border border-gray-200">
+                <h1 class="text-2xl font-bold text-gray-900 mb-4">Performance Review: John Doe</h1>
+                <p class="text-sm text-gray-600 mb-6"><strong>Role:</strong> Staff Software Engineer | <strong>Period:</strong> H2 2024</p>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Overall Assessment</h2>
+                <p class="text-gray-700 mb-4">
+                    John has demonstrated exceptional performance this quarter, with ratings of 4 (Meets Expectations) across all universal criteria and most role-specific competencies. His technical contributions and collaborative approach have made a significant impact on team delivery.
+                </p>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Universal Criteria Performance</h2>
+                <div class="space-y-3 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-40 font-medium text-gray-700">Craft/Quality:</div>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <span class="font-bold text-green-600 w-8">4</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-40 font-medium text-gray-700">Speed:</div>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <span class="font-bold text-green-600 w-8">4</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-40 font-medium text-gray-700">Adaptiveness:</div>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <span class="font-bold text-green-600 w-8">4</span>
+                    </div>
+                </div>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Role-Specific Competencies</h2>
+                <div class="space-y-3 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-40 font-medium text-gray-700">Code Quality:</div>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <span class="font-bold text-green-600 w-8">4</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-40 font-medium text-gray-700">System Design:</div>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <span class="font-bold text-green-600 w-8">4</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-40 font-medium text-gray-700">Mentoring:</div>
+                        <div class="flex-1 bg-gray-200 rounded-full h-2">
+                            <div class="bg-orange-400 h-2 rounded-full" style="width: 75%"></div>
+                        </div>
+                        <span class="font-bold text-orange-500 w-8">3</span>
+                    </div>
+                </div>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Key Strengths</h2>
+                <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                    <li><strong>Technical Excellence:</strong> Peers consistently praised John's code quality. Alice noted, "John's code reviews are thorough and educational."</li>
+                    <li><strong>Collaboration:</strong> Bob highlighted responsiveness: "Always available when I'm blocked on API questions."</li>
+                    <li><strong>System Thinking:</strong> Successfully architected the new authentication system with scalability and security in mind.</li>
+                </ul>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Manager Observations</h2>
+                <div class="bg-purple-50 border-l-4 border-purple-600 p-4 rounded">
+                    <p class="text-gray-700 mb-2 italic">Excellent code quality. Clean, well-tested, maintainable.</p>
+                    <p class="text-gray-700 italic">Good mentoring but could be more proactive. Suggest formal mentorship role.</p>
+                </div>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Development Focus</h2>
+                <p class="text-gray-700 mb-3">
+                    <strong>Mentoring (Rating: 3)</strong> - While John provides helpful guidance when asked, there's an opportunity to be more proactive in mentoring junior engineers.
+                </p>
+                <p class="text-gray-700 mb-4"><strong>Recommended actions:</strong></p>
+                <ol class="list-decimal pl-6 text-gray-700 space-y-2">
+                    <li>Take on a formal mentorship role with one junior engineer in Q1 2025</li>
+                    <li>Lead a lunch-and-learn session on authentication best practices</li>
+                    <li>Proactively offer code review walkthroughs to less experienced team members</li>
+                </ol>
+
+                <h2 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Compensation Impact</h2>
+                <p class="text-gray-700">
+                    <strong>Merit Increase Eligibility:</strong> <span class="text-orange-600 font-semibold">Not Eligible</span> (requires all 4s). With improvement in Mentoring to a 4 rating, John will be eligible for merit increases in the next review cycle.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple interactivity for mockup
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.addEventListener('click', () => {
+                alert('In the real app, this would open a file picker dialog');
+            });
+
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('active');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('active');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('active');
+                alert('Files dropped! In the real app, these would be parsed locally.');
+            });
+        });
+
+        // Update slider values
+        document.querySelectorAll('input[type="range"]').forEach(slider => {
+            const valueDisplay = slider.parentElement.querySelector('span.font-bold');
+            slider.addEventListener('input', (e) => {
+                const value = e.target.value;
+                valueDisplay.textContent = value;
+
+                // Update color based on rating
+                if (value === '4') {
+                    valueDisplay.className = 'text-sm font-bold text-green-600';
+                } else if (value === '3') {
+                    valueDisplay.className = 'text-sm font-bold text-orange-500';
+                } else if (value === '2') {
+                    valueDisplay.className = 'text-sm font-bold text-red-500';
+                } else {
+                    valueDisplay.className = 'text-sm font-bold text-red-700';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
