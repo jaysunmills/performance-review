@@ -5,8 +5,9 @@ A local-first, privacy-focused web application that helps managers generate comp
 ## Features
 
 - **🔒 Privacy-First**: All processing happens in your browser. No data is sent to any server except the AI provider you choose
+- **🔑 BYOK (Bring Your Own Key)**: Use your own OpenAI or Anthropic API key - no middleman, no markup
 - **📁 File Upload**: Drag-and-drop support for .pdf, .docx, and .txt files
-- **🤖 AI Integration**: Works with OpenAI GPT-4o or Anthropic Claude 3.5 Sonnet
+- **🤖 Multi-Model Support**: Choose from 10 different AI models across OpenAI and Anthropic
 - **🎚️ Competency Ratings**: Interactive sliders for universal and role-specific competencies
 - **📝 Flexible Input**: Upload existing notes or rate competencies from scratch
 - **✍️ Verbatim Mode**: Option to preserve manager notes exactly as written
@@ -49,10 +50,29 @@ The built files will be in the `dist/` directory. You can serve them with any st
 
 ## Usage Guide
 
-### 1. Configure AI Provider
+### 1. Select Model & Enter API Key
 
-1. Select your preferred AI provider (OpenAI or Anthropic)
-2. Enter your API key
+1. Select your preferred AI model from the dropdown:
+
+   **OpenAI Models:**
+   | Model | Best For |
+   |-------|----------|
+   | GPT-4o | Most capable, best quality |
+   | GPT-4o Mini | Fast & affordable |
+   | GPT-4 Turbo | Previous flagship |
+   | o1 | Advanced reasoning tasks |
+   | o1 Mini | Fast reasoning |
+   | o3 Mini | Latest reasoning model |
+
+   **Anthropic Models:**
+   | Model | Best For |
+   |-------|----------|
+   | Claude Sonnet 4.5 | Latest, most capable |
+   | Claude 3.5 Sonnet | Fast & capable |
+   | Claude 3.5 Haiku | Fastest, most affordable |
+   | Claude 3 Opus | Deep analysis |
+
+2. Enter your API key for the selected provider
    - **OpenAI**: Get your key at https://platform.openai.com/api-keys
    - **Anthropic**: Get your key at https://console.anthropic.com/settings/keys
 3. Your API key is stored only in your browser's memory (not persisted)
@@ -173,16 +193,17 @@ const ROLE_SPECIFIC_COMPETENCIES = [
 ];
 ```
 
-### Changing AI Models
+### Adding New AI Models
 
-In `src/App.jsx`, modify the model names:
+Edit the `MODELS` object in `src/App.jsx` to add new models:
 
 ```javascript
-// OpenAI
-model: 'gpt-4o'  // or 'gpt-4-turbo', 'gpt-3.5-turbo'
-
-// Anthropic
-model: 'claude-3-5-sonnet-20241022'  // or 'claude-3-opus-20240229'
+const MODELS = {
+  // Add a new OpenAI model
+  'gpt-5': { name: 'GPT-5', provider: 'openai', description: 'Next generation' },
+  // Add a new Anthropic model
+  'claude-4-opus': { name: 'Claude 4 Opus', provider: 'anthropic', description: 'Future model' },
+};
 ```
 
 ### Customizing the Prompt

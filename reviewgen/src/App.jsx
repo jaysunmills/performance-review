@@ -41,8 +41,26 @@ function App() {
 
   // Other state
   const [preserveVerbatim, setPreserveVerbatim] = useState(false);
-  const [apiProvider, setApiProvider] = useState('openai'); // 'openai' or 'anthropic'
+  const [selectedModel, setSelectedModel] = useState('gpt-4o');
   const [apiKey, setApiKey] = useState('');
+
+  // Available models
+  const MODELS = {
+    // OpenAI models
+    'gpt-4o': { name: 'GPT-4o', provider: 'openai', description: 'Most capable OpenAI model' },
+    'gpt-4o-mini': { name: 'GPT-4o Mini', provider: 'openai', description: 'Fast & affordable' },
+    'gpt-4-turbo': { name: 'GPT-4 Turbo', provider: 'openai', description: 'Previous flagship' },
+    'o1': { name: 'o1', provider: 'openai', description: 'Advanced reasoning' },
+    'o1-mini': { name: 'o1 Mini', provider: 'openai', description: 'Fast reasoning' },
+    'o3-mini': { name: 'o3 Mini', provider: 'openai', description: 'Latest reasoning model' },
+    // Anthropic models
+    'claude-sonnet-4-5-20250929': { name: 'Claude Sonnet 4.5', provider: 'anthropic', description: 'Latest Anthropic model' },
+    'claude-3-5-sonnet-20241022': { name: 'Claude 3.5 Sonnet', provider: 'anthropic', description: 'Fast & capable' },
+    'claude-3-5-haiku-20241022': { name: 'Claude 3.5 Haiku', provider: 'anthropic', description: 'Fastest Anthropic model' },
+    'claude-3-opus-20240229': { name: 'Claude 3 Opus', provider: 'anthropic', description: 'Most capable Claude 3' },
+  };
+
+  const getProvider = () => MODELS[selectedModel]?.provider || 'openai';
   const [generatedReview, setGeneratedReview] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState('');
@@ -200,22 +218,26 @@ function App() {
       dangerouslyAllowBrowser: true
     });
 
-    const response = await client.chat.completions.create({
-      model: 'gpt-4o',
-      messages: [
-        {
-          role: 'system',
-          content: 'You are an expert HR professional who writes clear, constructive performance reviews.'
-        },
-        {
-          role: 'user',
-          content: prompt
-        }
-      ],
-      temperature: 0.7,
-      max_tokens: 2000
-    });
+    // o1/o3 models don't support system messages or temperature
+    const isReasoningModel = selectedModel.startsWith('o1') || selectedModel.startsWith('o3');
 
+    const requestParams = {
+      model: selectedModel,
+      messages: isReasoningModel
+        ? [{ role: 'user', content: `You are an expert HR professional who writes clear, constructive performance reviews.\n\n${prompt}` }]
+        : [
+            { role: 'system', content: 'You are an expert HR professional who writes clear, constructive performance reviews.' },
+            { role: 'user', content: prompt }
+          ],
+      max_tokens: 4000
+    };
+
+    // Only add temperature for non-reasoning models
+    if (!isReasoningModel) {
+      requestParams.temperature = 0.7;
+    }
+
+    const response = await client.chat.completions.create(requestParams);
     return response.choices[0].message.content;
   };
 
@@ -227,8 +249,9 @@ function App() {
     });
 
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-5-20250929',
+      model: selectedModel,
       max_tokens: 4000,
+      system: 'You are an expert HR professional who writes clear, constructive performance reviews.',
       messages: [
         {
           role: 'user',
@@ -255,7 +278,7 @@ function App() {
       const prompt = buildPrompt();
 
       let review;
-      if (apiProvider === 'openai') {
+      if (getProvider() === 'openai') {
         review = await generateWithOpenAI(prompt);
       } else {
         review = await generateWithAnthropic(prompt);
@@ -284,23 +307,34 @@ function App() {
           <h2 className="text-xl font-semibold text-gray-800 mb-4">AI Configuration</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">AI Provider</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Model</label>
               <select
-                value={apiProvider}
-                onChange={(e) => setApiProvider(e.target.value)}
+                value={selectedModel}
+                onChange={(e) => setSelectedModel(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               >
-                <option value="openai">OpenAI (GPT-4o)</option>
-                <option value="anthropic">Anthropic (Claude 3.5 Sonnet)</option>
+                <optgroup label="OpenAI">
+                  {Object.entries(MODELS).filter(([_, m]) => m.provider === 'openai').map(([id, model]) => (
+                    <option key={id} value={id}>{model.name} - {model.description}</option>
+                  ))}
+                </optgroup>
+                <optgroup label="Anthropic">
+                  {Object.entries(MODELS).filter(([_, m]) => m.provider === 'anthropic').map(([id, model]) => (
+                    <option key={id} value={id}>{model.name} - {model.description}</option>
+                  ))}
+                </optgroup>
               </select>
+              <p className="text-xs text-gray-500 mt-1">Provider: {getProvider() === 'openai' ? 'OpenAI' : 'Anthropic'}</p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">API Key</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                {getProvider() === 'openai' ? 'OpenAI' : 'Anthropic'} API Key
+              </label>
               <input
                 type="password"
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
-                placeholder="Enter your API key"
+                placeholder={`Enter your ${getProvider() === 'openai' ? 'OpenAI' : 'Anthropic'} API key`}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               />
               <p className="text-xs text-gray-500 mt-1">Stored locally in your browser only</p>
