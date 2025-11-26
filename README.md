@@ -17,7 +17,9 @@ This system is designed to **enable high performance**, not artificially constra
 2. **Review Universal Criteria**: See `docs/universal-criteria.md` for standards that apply to everyone
 3. **Understand Scoring**: Read `docs/scoring-system.md` for the 1-4 scale definitions
 4. **Use Templates**: Find review templates in `templates/`
-5. **Automate 360 Feedback**: See `docs/360-feedback-automation.md` for programmatic survey generation
+5. **For Managers**: Read `docs/manager-guide.md` for behavior-based feedback best practices
+6. **For Implementation**: See `docs/rippling-implementation.md` if using Rippling platform
+7. **Automate 360 Feedback**: See `docs/360-feedback-automation.md` for Google Forms API (or use Rippling)
 
 ## Directory Structure
 
@@ -31,7 +33,8 @@ performance-review/
 │   ├── employee-guide.md        # Employee-facing introduction
 │   ├── manager-guide.md         # Manager guide: behavior-based feedback
 │   ├── process-guide.md         # Review process with time estimates
-│   └── 360-feedback-automation.md  # Automated survey generation guide
+│   ├── rippling-implementation.md  # Rippling platform implementation guide
+│   └── 360-feedback-automation.md  # Google Forms API automation (alternative)
 ├── rubrics/                     # Role-specific competency rubrics
 │   ├── ic-track/                # Individual Contributor roles
 │   │   ├── software-engineer/
